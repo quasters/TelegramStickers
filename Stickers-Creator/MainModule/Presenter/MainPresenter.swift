@@ -10,6 +10,7 @@ import Foundation
 protocol MainPresenterInputProtocol {
     init(view: MainViewController, router: RouterProtocol)
     func tapOnInfoButton()
+    func selectPhoto()
 }
 
 protocol MainPresenterOutputProtocol {
@@ -17,10 +18,6 @@ protocol MainPresenterOutputProtocol {
 }
 
 class MainPresenter: MainPresenterInputProtocol {
-    func tapOnInfoButton() {
-        router?.showInfo()
-    }
-    
     weak var view: MainViewController?
     var router: RouterProtocol?
     
@@ -29,4 +26,11 @@ class MainPresenter: MainPresenterInputProtocol {
         self.router = router
     }
     
+    func tapOnInfoButton() {
+        router?.showInfo()
+    }
+    
+    func selectPhoto() {
+        
+    }
 }

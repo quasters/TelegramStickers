@@ -10,23 +10,24 @@ import UIKit
 class MainViewController: UIViewController {
 
     var presenter: MainPresenterInputProtocol?
-    
+    var imageView = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(testPush), for: .touchUpInside)
-        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
-        self.navigationItem.leftBarButtonItem = infoBarButtonItem
-        
-        self.title = "One"
+        configureTabView()  // SetupNavigationView
+
+//        imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 400)
+//        imageView.center = view.center
+//        imageView.contentMode = .scaleToFill
+
     }
 
-    @objc func testPush() {
-        presenter?.tapOnInfoButton()
-    }
+
 }
 
 extension MainViewController: MainPresenterOutputProtocol {
     
 }
+
+
+

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D191013A283514F500CE2A35 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1910139283514F500CE2A35 /* InfoCell.swift */; };
+		D19D3DBD28357E2300B441F5 /* SetupNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */; };
+		D19D3DBF283595BC00B441F5 /* PickerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */; };
 		D1D6B4C22833FBAF0050EEDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */; };
 		D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */; };
 		D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */; };
@@ -44,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		D1910139283514F500CE2A35 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNavigationView.swift; sourceTree = "<group>"; };
+		D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerExtensions.swift; sourceTree = "<group>"; };
 		D1D6B4BE2833FBAF0050EEDF /* Stickers-Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stickers-Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */,
+				D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */,
+				D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,12 +342,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */,
+				D19D3DBF283595BC00B441F5 /* PickerExtensions.swift in Sources */,
 				D1D6B502283418680050EEDF /* AsselderBuilder.swift in Sources */,
 				D1D6B4C22833FBAF0050EEDF /* AppDelegate.swift in Sources */,
 				D1D6B50828341F4A0050EEDF /* InfoPresenter.swift in Sources */,
 				D1D6B500283417EE0050EEDF /* Router.swift in Sources */,
 				D191013A283514F500CE2A35 /* InfoCell.swift in Sources */,
 				D1D6B50628341F350050EEDF /* InfoViewController.swift in Sources */,
+				D19D3DBD28357E2300B441F5 /* SetupNavigationView.swift in Sources */,
 				D1D6B4F82834000E0050EEDF /* ImageLayers.swift in Sources */,
 				D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */,
 				D1D6B4FC2834069B0050EEDF /* MainPresenter.swift in Sources */,
