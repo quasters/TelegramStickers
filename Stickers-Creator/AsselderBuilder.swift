@@ -17,7 +17,8 @@ protocol AsselderBuilderProtocol {
 class AsselderBuilder: AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-        let presenter = MainPresenter(view: view, router: router)
+        let accessManager = AccessManager()
+        let presenter = MainPresenter(view: view, router: router, accessManager: accessManager)
         view.presenter = presenter
         return view
     }
