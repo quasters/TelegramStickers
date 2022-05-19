@@ -7,6 +7,12 @@
 
 import Foundation
 
-struct ImageLayers {
-    
+struct Photoes {
+    static var isAllowCamera = false
+    static var isAllowPhotoLibrary = false
+    var savedImages: [SavedImage]
+}
+
+struct SavedImage {
+    var path: String
 }
