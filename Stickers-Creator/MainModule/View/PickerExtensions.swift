@@ -63,7 +63,16 @@ extension MainViewController: PHPickerViewControllerDelegate {
                     vc.delegate = self
                     self.present(vc, animated: true)
                 case .limited:
-                    PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+                    if #available(iOS 15, *) {
+//                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self) { assets in
+//
+//                        }
+                    } else {
+                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+                        
+                        
+                        //PHPhotoLibraryChangeObserver.photoLibraryDidChange(newPhotos)
+                    }
                 default:
                     fatalError("Unknown PHAuthorizationStatus")
                 }

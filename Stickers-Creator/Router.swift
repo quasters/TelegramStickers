@@ -14,6 +14,7 @@ protocol RouterProtocol {
     
     func initialViewController()
     func showInfo()
+    func showSelectedPhotos()
     func popToRoot()
 }
 
@@ -30,6 +31,13 @@ class Router: RouterProtocol {
         if let navigationController = navigationController {
             guard let mainVC = assemblyBuilder?.createMainModule(router: self) else { return }
             navigationController.viewControllers = [mainVC]
+        }
+    }
+    
+    func showSelectedPhotos() {
+        if let navigationController = navigationController {
+            guard let selectedPhotosVC = assemblyBuilder?.createSelectedPhotosModule(router: self) else { return }
+            navigationController.pushViewController(selectedPhotosVC, animated: true)
         }
     }
     

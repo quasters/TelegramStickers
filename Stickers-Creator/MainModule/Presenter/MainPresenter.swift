@@ -23,6 +23,7 @@ class MainPresenter: MainPresenterInputProtocol {
     weak var view: MainViewController?
     var router: RouterProtocol?
     var accessManager: AccessManagerProtocol?
+    var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
     
     required init(view: MainViewController, router: RouterProtocol, accessManager: AccessManager) {
         self.view = view
@@ -44,7 +45,9 @@ class MainPresenter: MainPresenterInputProtocol {
     
     func getPhotoLibraryAccessPermission(complition: @escaping (PHAuthorizationStatus) -> Void) {
         accessManager?.readPhotoLibraryAccessPemission(complition: { status in
-            complition(status)
+            DispatchQueue.main.async {
+                complition(status)
+            }
         })
     }
     

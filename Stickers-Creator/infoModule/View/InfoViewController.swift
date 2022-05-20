@@ -12,8 +12,8 @@ class InfoViewController: UIViewController {
     private var infoTableView = UITableView()
     var presenter: InfoPresenterProtocol?
     
-    private let groupSections = ["Developer", "Suggestions and help", "Donate"]
-    private let itemRows = [["cybshot"], ["helpchat0", "helpchat1"], ["donatechat0"]]
+    //private let groupSections = ["Developer", "Suggestions and help", "Donate"]
+    //private let itemRows = [["cybshot"], ["helpchat0", "helpchat1"], ["donatechat0"]]
     
     private let cellIdentifier = "Cell"
     private struct Images {
@@ -29,22 +29,25 @@ class InfoViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension InfoViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groupSections.count
+        //return groupSections.count
+        return presenter?.getSectionsCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemRows[section].count
+        //return itemRows[section].count
+        return presenter?.getRowCount(section: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! InfoCell
-        let username = "@" + itemRows[indexPath.section][indexPath.row]
-        cell.set(username: username, imageName: Images.telegramIcon)
+        if let username = presenter?.getRowLabel(section: indexPath.section, row: indexPath.row) {  //itemRows[indexPath.section][indexPath.row]
+            cell.set(username: "@" + username, imageName: Images.telegramIcon)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = self.groupSections[section].localizedUppercase
+        let section = presenter?.getSectionLabel(section: section).localizedUppercase   //self.groupSections[section].localizedUppercase
         return section
     }
 }
@@ -52,7 +55,7 @@ extension InfoViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension InfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let username = itemRows[indexPath.section][indexPath.row]
+        guard let username = presenter?.getRowLabel(section: indexPath.section, row: indexPath.row) else { return }  //itemRows[indexPath.section][indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
         presenter?.followTheLink(username: username)
     }

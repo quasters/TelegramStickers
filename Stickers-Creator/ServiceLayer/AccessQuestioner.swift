@@ -50,7 +50,6 @@ class AccessManager: AccessManagerProtocol {
         var status: PHAuthorizationStatus
         if #available(iOS 14, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-            
         } else {
             status = PHPhotoLibrary.authorizationStatus()
         }

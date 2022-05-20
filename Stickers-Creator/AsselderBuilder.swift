@@ -11,7 +11,7 @@ import UIKit
 protocol AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
     func createInfoModule(router: RouterProtocol) -> UIViewController
-
+    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController
 }
 
 class AsselderBuilder: AsselderBuilderProtocol {
@@ -25,10 +25,16 @@ class AsselderBuilder: AsselderBuilderProtocol {
     
     func createInfoModule(router: RouterProtocol) -> UIViewController {
         let view = InfoViewController()
-        let presenter = InfoPresenter(router: router)
+        let infoModel = InfoModel()
+        let presenter = InfoPresenter(router: router, infoModel: infoModel)
         view.presenter = presenter
         return view
     }
 
-    
+    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController {
+        let view = SelectedPhotosViewController()
+        let presenter = SelectedPhotosPresenter(view: view, router: router)
+        view.presenter = presenter
+        return view
+    }
 }
