@@ -14,8 +14,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTabView()  // SetupNavigationView
-
+        configureNavigationView()
+  
         imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 400)
         imageView.center = view.center
         imageView.contentMode = .scaleToFill
@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
 
 }
 
-extension MainViewController: MainPresenterOutputProtocol {
+extension MainViewController: MainViewPresenterOutputProtocol {
     
 }
 

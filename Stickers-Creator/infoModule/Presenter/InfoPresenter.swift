@@ -8,16 +8,46 @@
 import Foundation
 import UIKit
 
-protocol InfoPresenterProtocol {
+protocol InfoPresenterInputProtocol: AnyObject {
     func followTheLink(username: String)
+    
+    func getSectionLabel(section: Int) -> String
+    func getRowLabel(section: Int, row: Int) -> String
+    func getSectionsCount() -> Int
+    func getRowCount(section: Int) -> Int
 }
 
-class InfoPresenter: InfoPresenterProtocol {
+protocol InfoViewPresenterOutputProtocol: AnyObject {
+    // nothing now
+}
+
+class InfoPresenter: InfoPresenterInputProtocol {
+    weak var view: InfoViewPresenterOutputProtocol?
     var router: RouterProtocol?
-    init(router: RouterProtocol){
+    var infoModel: InfoModel
+    init(view: InfoViewPresenterOutputProtocol, router: RouterProtocol, infoModel: InfoModel){
         self.router = router
+        self.infoModel = infoModel
     }
     
+    
+    func getSectionLabel(section: Int) -> String {
+        return infoModel.groupSections[section]
+    }
+
+    func getRowLabel(section: Int, row: Int) -> String {
+        return infoModel.itemRows[section][row]
+    }
+    
+    func getSectionsCount() -> Int {
+        return infoModel.groupSections.count
+    }
+    
+    func getRowCount(section: Int) -> Int {
+        return infoModel.itemRows[section].count
+    }
+    
+
     func followTheLink(username: String) {
         let appURL = URL(string: "tg://resolve?domain=\(username)")!
         let webURL = URL(string: "https://t.me/\(username)")!

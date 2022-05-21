@@ -8,23 +8,25 @@
 import Foundation
 import Photos
 
-protocol MainPresenterInputProtocol {
-    init(view: MainViewController, router: RouterProtocol, accessManager: AccessManager)
+protocol MainPresenterInputProtocol: AnyObject {
+    init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager)
     func tapOnInfoButton()
     func getCameraAccessPermission(complition: @escaping (Bool) -> Void)
     func getPhotoLibraryAccessPermission(complition: @escaping (PHAuthorizationStatus) -> Void)
+    func showSelectedPhotos()
 }
 
-protocol MainPresenterOutputProtocol {
+protocol MainViewPresenterOutputProtocol: AnyObject {
     
 }
 
 class MainPresenter: MainPresenterInputProtocol {
-    weak var view: MainViewController?
+    weak var view: MainViewPresenterOutputProtocol?
     var router: RouterProtocol?
     var accessManager: AccessManagerProtocol?
+    var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
     
-    required init(view: MainViewController, router: RouterProtocol, accessManager: AccessManager) {
+    required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager) {
         self.view = view
         self.router = router
         self.accessManager = accessManager
@@ -50,6 +52,8 @@ class MainPresenter: MainPresenterInputProtocol {
         })
     }
     
-
+    func showSelectedPhotos() {
+        router?.showSelectedPhotos()
+    }
     
 }
