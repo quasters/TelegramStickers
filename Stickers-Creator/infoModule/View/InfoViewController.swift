@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class InfoViewController: UIViewController {
+class InfoViewController: UIViewController, InfoViewPresenterOutputProtocol {
     private var infoTableView = UITableView()
-    var presenter: InfoPresenterProtocol?
+    var presenter: InfoPresenterInputProtocol?
     
     //private let groupSections = ["Developer", "Suggestions and help", "Donate"]
     //private let itemRows = [["cybshot"], ["helpchat0", "helpchat1"], ["donatechat0"]]

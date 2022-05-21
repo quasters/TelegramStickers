@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		D147844C2836903F006711DA /* AccessQuestioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D147844B2836903F006711DA /* AccessQuestioner.swift */; };
 		D191013A283514F500CE2A35 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1910139283514F500CE2A35 /* InfoCell.swift */; };
-		D19D3DBD28357E2300B441F5 /* SetupNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */; };
+		D19D3DBD28357E2300B441F5 /* configureNavigationView().swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBC28357E2300B441F5 /* configureNavigationView().swift */; };
 		D19D3DBF283595BC00B441F5 /* PickerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */; };
 		D1AE53142837A55700C038B6 /* SelectedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE53132837A55700C038B6 /* SelectedPhotosViewController.swift */; };
 		D1AE531C2837C3F700C038B6 /* SelectedPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE531B2837C3F700C038B6 /* SelectedPhotosPresenter.swift */; };
 		D1AE531F2837C71100C038B6 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE531E2837C71100C038B6 /* InfoModel.swift */; };
+		D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE532A2839120F00C038B6 /* ErrorViewController.swift */; };
+		D1AE532D2839120F00C038B6 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AE532B2839120F00C038B6 /* ErrorViewController.xib */; };
+		D1AE53312839180500C038B6 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE53302839180500C038B6 /* ErrorPresenter.swift */; };
 		D1D6B4C22833FBAF0050EEDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */; };
 		D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */; };
 		D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */; };
@@ -51,11 +54,14 @@
 /* Begin PBXFileReference section */
 		D147844B2836903F006711DA /* AccessQuestioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessQuestioner.swift; sourceTree = "<group>"; };
 		D1910139283514F500CE2A35 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
-		D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNavigationView.swift; sourceTree = "<group>"; };
+		D19D3DBC28357E2300B441F5 /* configureNavigationView().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "configureNavigationView().swift"; sourceTree = "<group>"; };
 		D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerExtensions.swift; sourceTree = "<group>"; };
 		D1AE53132837A55700C038B6 /* SelectedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosViewController.swift; sourceTree = "<group>"; };
 		D1AE531B2837C3F700C038B6 /* SelectedPhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosPresenter.swift; sourceTree = "<group>"; };
 		D1AE531E2837C71100C038B6 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
+		D1AE532A2839120F00C038B6 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		D1AE532B2839120F00C038B6 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
+		D1AE53302839180500C038B6 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		D1D6B4BE2833FBAF0050EEDF /* Stickers-Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stickers-Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +149,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D1AE5327283911CC00C038B6 /* ErrorModule */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE532F283917E700C038B6 /* Presenter */,
+				D1AE532E283917D100C038B6 /* VIew */,
+			);
+			path = ErrorModule;
+			sourceTree = "<group>";
+		};
+		D1AE532E283917D100C038B6 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE532A2839120F00C038B6 /* ErrorViewController.swift */,
+				D1AE532B2839120F00C038B6 /* ErrorViewController.xib */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		D1AE532F283917E700C038B6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D1AE53302839180500C038B6 /* ErrorPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		D1D6B4B52833FBAF0050EEDF = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +198,7 @@
 		D1D6B4C02833FBAF0050EEDF /* Stickers-Creator */ = {
 			isa = PBXGroup;
 			children = (
+				D1AE5327283911CC00C038B6 /* ErrorModule */,
 				D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */,
 				D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */,
 				D1D6B501283418680050EEDF /* AsselderBuilder.swift */,
@@ -221,7 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */,
-				D19D3DBC28357E2300B441F5 /* SetupNavigationView.swift */,
+				D19D3DBC28357E2300B441F5 /* configureNavigationView().swift */,
 				D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */,
 			);
 			path = View;
@@ -367,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1D6B4CE2833FBB30050EEDF /* LaunchScreen.storyboard in Resources */,
+				D1AE532D2839120F00C038B6 /* ErrorViewController.xib in Resources */,
 				D1D6B4CB2833FBB30050EEDF /* Assets.xcassets in Resources */,
 				D1D6B4C92833FBAF0050EEDF /* Main.storyboard in Resources */,
 			);
@@ -404,10 +438,12 @@
 				D147844C2836903F006711DA /* AccessQuestioner.swift in Sources */,
 				D191013A283514F500CE2A35 /* InfoCell.swift in Sources */,
 				D1D6B50628341F350050EEDF /* InfoViewController.swift in Sources */,
-				D19D3DBD28357E2300B441F5 /* SetupNavigationView.swift in Sources */,
+				D1AE53312839180500C038B6 /* ErrorPresenter.swift in Sources */,
+				D19D3DBD28357E2300B441F5 /* configureNavigationView().swift in Sources */,
 				D1D6B4F82834000E0050EEDF /* ImageLayers.swift in Sources */,
 				D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */,
 				D1D6B4FC2834069B0050EEDF /* MainPresenter.swift in Sources */,
+				D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */,
 				D1AE531C2837C3F700C038B6 /* SelectedPhotosPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

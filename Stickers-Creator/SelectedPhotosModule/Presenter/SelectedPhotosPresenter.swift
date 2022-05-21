@@ -7,19 +7,19 @@
 
 import Foundation
 
-protocol SelectedPhotosPresenterInputProtocol {
-    init(view: SelectedPhotosViewController, router: RouterProtocol)
+protocol SelectedPhotosPresenterInputProtocol: AnyObject {
+    init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol)
 }
 
-protocol SelectedPhotosPresenterPresenterOutputProtocol {
+protocol SelectedPhotosViewPresenterOutputProtocol: AnyObject {
     
 }
 
 class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
-    weak var view: SelectedPhotosViewController?
+    weak var view: SelectedPhotosViewPresenterOutputProtocol?
     var router: RouterProtocol?
     
-    required init(view: SelectedPhotosViewController, router: RouterProtocol) {
+    required init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol) {
         self.view = view
         self.router = router
     }

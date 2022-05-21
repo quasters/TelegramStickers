@@ -10,17 +10,20 @@ import UIKit
 
 extension MainViewController {
     
-// MARK: - infoButton
-    func configureTabView() {
+    func configureNavigationView() {
         //self.title = "Stickers"
-        createInfoTabButton()
+
+        createInfoButton()
         createRightButtons()
     }
     
-    func createInfoTabButton() {
+// MARK: - infoButton
+    
+    func createInfoButton() {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(pushInfoView(sender:)), for: .touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        //return infoBarButtonItem
         self.navigationItem.leftBarButtonItem = infoBarButtonItem
     }
     
@@ -34,15 +37,16 @@ extension MainViewController {
         buttons.append(createButton(image: "camera", isEnabled: true, action: #selector(showActionSheet)))
         buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: false, action: nil))
         buttons.append(createButton(image: "arrow.uturn.backward.circle", isEnabled: false, action: nil))
+        buttons.append(createButton(image: "xmark.circle", isEnabled: false, action: nil))
         
         self.navigationItem.rightBarButtonItems = buttons
     }
     
     func createButton(image: String, isEnabled: Bool, action: Selector?) -> UIBarButtonItem {
         let image = UIImage(systemName: image)
-        let rightButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
-        rightButtonItem.isEnabled = isEnabled
-        return rightButtonItem
+        let ButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
+        ButtonItem.isEnabled = isEnabled
+        return ButtonItem
     }
     
 // MARK: - photoActionSheet

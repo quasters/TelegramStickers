@@ -25,5 +25,7 @@
 	<string>Please allow access to your Camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to your Photo Gallery</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 </dict>
 </plist>

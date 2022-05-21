@@ -13,7 +13,7 @@ case sections
 case rows
 }
 
-protocol InfoPresenterProtocol {
+protocol InfoPresenterInputProtocol: AnyObject {
     func followTheLink(username: String)
     
     func getSectionLabel(section: Int) -> String
@@ -22,10 +22,15 @@ protocol InfoPresenterProtocol {
     func getRowCount(section: Int) -> Int
 }
 
-class InfoPresenter: InfoPresenterProtocol {
+protocol InfoViewPresenterOutputProtocol: AnyObject {
+    // nothing now
+}
+
+class InfoPresenter: InfoPresenterInputProtocol {
+    weak var view: InfoViewPresenterOutputProtocol?
     var router: RouterProtocol?
     var infoModel: InfoModel
-    init(router: RouterProtocol, infoModel: InfoModel){
+    init(view: InfoViewPresenterOutputProtocol, router: RouterProtocol, infoModel: InfoModel){
         self.router = router
         self.infoModel = infoModel
     }

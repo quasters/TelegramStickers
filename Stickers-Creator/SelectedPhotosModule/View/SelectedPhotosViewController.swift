@@ -19,8 +19,18 @@ class SelectedPhotosViewController: UIViewController, PHPhotoLibraryChangeObserv
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        PHPhotoLibrary.shared().register(self)
-
+        //PHPhotoLibrary.shared().register(self)
+        
+        
+        
     }
 
+}
+
+extension SelectedPhotosViewController: SelectedPhotosViewPresenterOutputProtocol {
+    
+}
+
+extension SelectedPhotosViewController: UINavigationControllerDelegate {
+    
 }

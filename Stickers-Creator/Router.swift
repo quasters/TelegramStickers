@@ -13,6 +13,7 @@ protocol RouterProtocol {
     var assemblyBuilder: AsselderBuilderProtocol? { get set }
     
     func initialViewController()
+    func showErrorController(code: Int, message: String)
     func showInfo()
     func showSelectedPhotos()
     func popToRoot()
@@ -34,10 +35,20 @@ class Router: RouterProtocol {
         }
     }
     
+    func showErrorController(code: Int, message: String) {
+        if let navigationController = navigationController {
+            guard let errorVC = assemblyBuilder?.createErrorController(router: self, code: code, message: message) else { return }
+            navigationController.pushViewController(errorVC, animated: false)
+        }
+    }
+    
     func showSelectedPhotos() {
         if let navigationController = navigationController {
-            guard let selectedPhotosVC = assemblyBuilder?.createSelectedPhotosModule(router: self) else { return }
-            navigationController.pushViewController(selectedPhotosVC, animated: true)
+            guard let selectedPhotosVC = assemblyBuilder?.createSelectedPhotosModule(router: self)
+            else { return }
+            selectedPhotosVC.modalPresentationStyle = .fullScreen
+            let last = navigationController.viewControllers.first
+            last?.present(selectedPhotosVC, animated: true)
         }
     }
     
