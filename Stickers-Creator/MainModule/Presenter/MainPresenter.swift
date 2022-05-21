@@ -44,7 +44,9 @@ class MainPresenter: MainPresenterInputProtocol {
     
     func getPhotoLibraryAccessPermission(complition: @escaping (PHAuthorizationStatus) -> Void) {
         accessManager?.readPhotoLibraryAccessPemission(complition: { status in
-            complition(status)
+            DispatchQueue.main.async {
+                complition(status)
+            }
         })
     }
     
