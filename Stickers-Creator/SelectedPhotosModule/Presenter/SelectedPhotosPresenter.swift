@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SelectedPhotosPresenterInputProtocol: AnyObject {
     init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol)
@@ -24,4 +25,7 @@ class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
         self.router = router
     }
     
+    func tapOnCloseButton(view: UIViewController) {
+        router?.closeSelectedPhotos(view: view)
+    }
 }

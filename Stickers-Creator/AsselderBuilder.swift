@@ -11,7 +11,8 @@ import UIKit
 protocol AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController?
     func createInfoModule(router: RouterProtocol) -> UIViewController?
-    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController?
+//    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController?
+    func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController?
     func createErrorController(router: RouterProtocol, code: Int, message: String) -> UIViewController
 }
 
@@ -32,21 +33,23 @@ class AsselderBuilder: AsselderBuilderProtocol {
         view.presenter = presenter
         return view
     }
-
+    
 //    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController? {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        guard let view = storyboard.instantiateViewController(withIdentifier: "SelectedPhotosVC") as? SelectedPhotosViewController
-//        else { return nil }
+//        let view = SelectedPhotosViewController(nibName: "SelectedPhotosViewController", bundle: nil)
 //        let presenter = SelectedPhotosPresenter(view: view, router: router)
 //        view.presenter = presenter
 //        return view
 //    }
     
-    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController? {
-        let view = SelectedPhotosViewController(nibName: "SelectedPhotosViewController", bundle: nil)
+    func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController? {
+        let navigation = UINavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
+        let view = SelectedPhotosViewController()
+        //let view = SelectedPhotosNavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
+        navigation.viewControllers = [view]
         let presenter = SelectedPhotosPresenter(view: view, router: router)
+        
         view.presenter = presenter
-        return view
+        return navigation
     }
     
     func createErrorController(router: RouterProtocol, code: Int, message: String) -> UIViewController {

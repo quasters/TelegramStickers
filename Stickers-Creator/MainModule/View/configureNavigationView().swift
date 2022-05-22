@@ -61,9 +61,7 @@ extension MainViewController {
             self.openGallery() // PickerExtensions
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (UIAlertAction) in
-            print("Cancel")
-        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
     }

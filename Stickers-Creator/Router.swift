@@ -16,6 +16,7 @@ protocol RouterProtocol {
     func showErrorController(code: Int, message: String)
     func showInfo()
     func showSelectedPhotos()
+    func closeSelectedPhotos(view: UIViewController)
     func popToRoot()
 }
 
@@ -58,6 +59,13 @@ class Router: RouterProtocol {
             selectedPhotosVC.modalPresentationStyle = .fullScreen
             let last = navigationController.viewControllers.first
             last?.present(selectedPhotosVC, animated: true)
+        }
+    }
+    
+    func closeSelectedPhotos(view: UIViewController) {
+        if let navigationController = navigationController {
+            view.dismiss(animated: true)
+            popToRoot()
         }
     }
     
