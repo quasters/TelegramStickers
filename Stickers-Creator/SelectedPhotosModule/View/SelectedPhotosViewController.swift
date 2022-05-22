@@ -11,14 +11,21 @@ import PhotosUI
 
 class SelectedPhotosViewController: UICollectionViewController {
     var presenter: SelectedPhotosPresenter?
-    var photos = [UIImage]()
     var width: CGFloat?
-    //var selectedCollection: UICollectionView?
     
-    let itemsPerRow: CGFloat = 3 //Коллчичество ячеек в ряду
+    let itemsPerRow: CGFloat = 3 // Количество ячеек в ряду
+    let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) // Отступы
     
-    let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) // отступы
+    var photos = [UIImage]()
+    //var phKitAdapter = PhotoKitAdapter()
+    //var model = SelectedPhotosModel()
     
+    //
+    
+    
+    //var allPhotos:PHFetchResult<PHAsset>?
+            
+    //
     
     
     override func  viewWillLayoutSubviews() {
@@ -28,66 +35,37 @@ class SelectedPhotosViewController: UICollectionViewController {
 //        image.contentMode = .scaleToFill
 //        image.center = view.center
 //        view.addSubview(image)
-        //createCollection()
-        //getPhoto()
+//        createCollection()
+//        getPhoto()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         self.collectionView!.register(SelectedCell.self, forCellWithReuseIdentifier: "id")
-        PHPhotoLibrary.shared().register(self)
+        //PHPhotoLibrary.shared().register(self)
     }
 
     
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        print("----------------\(model.images.count)")
+        return model.images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let originalCell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath)
         guard let cell = originalCell as? SelectedCell else { originalCell.backgroundColor = .gray; return originalCell }
-        cell.setImage(image: photos[indexPath.row])
+        cell.setImage(image: model.images[indexPath.row])
+        print(model.images[indexPath.row])
         return cell
     }
-    
-    
-    
-    func configureNavigationBar() {
-        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC))
-        let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
-        self.navigationItem.rightBarButtonItem = rightButton
-        self.navigationItem.leftBarButtonItem = leftButton
-    }
-    
-    @objc func backToMainVC() {
-        presenter?.tapOnCloseButton(for: self)
-    }
-    
-    @objc func showActionSheet() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    
-        alert.addAction(UIAlertAction(title: "Select More Photos", style: .default, handler: { (UIAlertAction) in
-            self.pickMorePhotos()
-        }))
-        alert.addAction(UIAlertAction(title: "Change Settings", style: .default, handler: { (UIAlertAction) in
-            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
+
     
     
     func pickMorePhotos() {
-        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self) { assets in
-            var details = PHFetchResultChangeDetails
-        }
+        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
     }
 }
 
@@ -118,12 +96,52 @@ extension SelectedPhotosViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-extension SelectedPhotosViewController: PHPhotoLibraryChangeObserver {
-    func photoLibraryDidChange(_ changeInstance: PHChange) {
-        <#code#>
+//extension SelectedPhotosViewController: PHPhotoLibraryChangeObserver {
+//    func photoLibraryDidChange(_ changeInstance: PHChange) {
+//        let changeResults = changeInstance.changeDetails(for: allPhotos!)
+//        allPhotos = changeResults?.fetchResultAfterChanges
+//        updateImages()
+//    }
+//
+//
+//    func updateImages() {
+//        // update self.images
+//        ...
+//    }
+//
+//}
+
+
+extension SelectedPhotosViewController {
+    // MARK: - Configuration NavigationBar
+    func configureNavigationBar() {
+        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC))
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
+        self.navigationItem.rightBarButtonItem = rightButton
+        self.navigationItem.leftBarButtonItem = leftButton
     }
     
+    @objc func backToMainVC() {
+        presenter?.tapOnCloseButton(for: self)
+    }
     
+    // MARK: - Configure Action Sheet to do with Selecting Photo 
+    @objc func showActionSheet() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+        alert.addAction(UIAlertAction(title: "Select More Photos", style: .default, handler: { (UIAlertAction) in
+            self.pickMorePhotos()
+        }))
+        alert.addAction(UIAlertAction(title: "Change Settings", style: .default, handler: { (UIAlertAction) in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
 }
 
 

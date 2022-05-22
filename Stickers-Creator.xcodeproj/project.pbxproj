@@ -11,6 +11,8 @@
 		D167F2672839753800794A48 /* SelectedPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F2652839753800794A48 /* SelectedPhotosViewController.swift */; };
 		D167F2682839753800794A48 /* SelectedPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D167F2662839753800794A48 /* SelectedPhotosViewController.xib */; };
 		D167F26A2839B99D00794A48 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F2692839B99D00794A48 /* SelectedCell.swift */; };
+		D167F26D283AAA4000794A48 /* PhotoKitAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F26C283AAA4000794A48 /* PhotoKitAdapter.swift */; };
+		D167F270283ADB1500794A48 /* SelectedPhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F26F283ADB1500794A48 /* SelectedPhotosModel.swift */; };
 		D191013A283514F500CE2A35 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1910139283514F500CE2A35 /* InfoCell.swift */; };
 		D19D3DBD28357E2300B441F5 /* configureNavigationView().swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBC28357E2300B441F5 /* configureNavigationView().swift */; };
 		D19D3DBF283595BC00B441F5 /* PickerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */; };
@@ -58,6 +60,8 @@
 		D167F2652839753800794A48 /* SelectedPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosViewController.swift; sourceTree = "<group>"; };
 		D167F2662839753800794A48 /* SelectedPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedPhotosViewController.xib; sourceTree = "<group>"; };
 		D167F2692839B99D00794A48 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
+		D167F26C283AAA4000794A48 /* PhotoKitAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoKitAdapter.swift; sourceTree = "<group>"; };
+		D167F26F283ADB1500794A48 /* SelectedPhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosModel.swift; sourceTree = "<group>"; };
 		D1910139283514F500CE2A35 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		D19D3DBC28357E2300B441F5 /* configureNavigationView().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "configureNavigationView().swift"; sourceTree = "<group>"; };
 		D19D3DBE283595BC00B441F5 /* PickerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerExtensions.swift; sourceTree = "<group>"; };
@@ -120,11 +124,29 @@
 			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
+		D167F26B283AAA0A00794A48 /* PhotoKitAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				D167F26C283AAA4000794A48 /* PhotoKitAdapter.swift */,
+			);
+			path = PhotoKitAdapter;
+			sourceTree = "<group>";
+		};
+		D167F26E283ADB0700794A48 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D167F26F283ADB1500794A48 /* SelectedPhotosModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D1AE53122837A0BC00C038B6 /* SelectedPhotosModule */ = {
 			isa = PBXGroup;
 			children = (
-				D1AE531A2837C3AE00C038B6 /* Presenter */,
+				D167F26E283ADB0700794A48 /* Model */,
 				D1AE53192837C39700C038B6 /* View */,
+				D167F26B283AAA0A00794A48 /* PhotoKitAdapter */,
+				D1AE531A2837C3AE00C038B6 /* Presenter */,
 			);
 			path = SelectedPhotosModule;
 			sourceTree = "<group>";
@@ -434,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D167F270283ADB1500794A48 /* SelectedPhotosModel.swift in Sources */,
 				D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */,
 				D19D3DBF283595BC00B441F5 /* PickerExtensions.swift in Sources */,
 				D1D6B502283418680050EEDF /* AsselderBuilder.swift in Sources */,
@@ -453,6 +476,7 @@
 				D1D6B4FC2834069B0050EEDF /* MainPresenter.swift in Sources */,
 				D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */,
 				D1AE531C2837C3F700C038B6 /* SelectedPhotosPresenter.swift in Sources */,
+				D167F26D283AAA4000794A48 /* PhotoKitAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
