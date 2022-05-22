@@ -16,10 +16,9 @@ class SelectedPhotosViewController: UICollectionViewController {
     let itemsPerRow: CGFloat = 3 // Количество ячеек в ряду
     let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) // Отступы
     
-    var photos = [UIImage]()
-    //var phKitAdapter = PhotoKitAdapter()
-    //var model = SelectedPhotosModel()
-    
+    //var photos = [UIImage]()
+    var adapter = PhotoKitAdapter()
+    //var model: SelectedPhotosModel?
     //
     
     
@@ -44,21 +43,24 @@ class SelectedPhotosViewController: UICollectionViewController {
         configureNavigationBar()
         self.collectionView!.register(SelectedCell.self, forCellWithReuseIdentifier: "id")
         //PHPhotoLibrary.shared().register(self)
+        //model = SelectedPhotosModel(adapter: phKitAdapter, images: photos)
     }
 
     
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("----------------\(model.images.count)")
-        return model.images.count
+        print("----------------\(adapter.images.count)")
+        return adapter.images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let originalCell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath)
         guard let cell = originalCell as? SelectedCell else { originalCell.backgroundColor = .gray; return originalCell }
-        cell.setImage(image: model.images[indexPath.row])
-        print(model.images[indexPath.row])
+        let image = adapter.images[indexPath.row]
+
+        cell.setImage(image: image)
+        print(image)
         return cell
     }
 

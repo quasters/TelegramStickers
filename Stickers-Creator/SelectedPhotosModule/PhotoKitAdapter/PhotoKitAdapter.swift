@@ -8,14 +8,19 @@
 import Foundation
 import PhotosUI
 
+
+
+
+
 class PhotoKitAdapter: NSObject, PHPhotoLibraryChangeObserver, ObservableObject {
     
     var allPhotos: PHFetchResult<PHAsset>?
-    var images:[UIImage] = []
+    var images = [UIImage]()
     
     override init(){
         super.init()
         startFetching()
+        
     }
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
@@ -26,6 +31,7 @@ class PhotoKitAdapter: NSObject, PHPhotoLibraryChangeObserver, ObservableObject 
                 self.objectWillChange.send()
             }
         }
+        print("did change: \(self.images.count)")
     }
     
     fileprivate func updateImages() {
@@ -36,6 +42,7 @@ class PhotoKitAdapter: NSObject, PHPhotoLibraryChangeObserver, ObservableObject 
                 appendImage(photo)
             }
         }
+        print("updateImg: \(self.images.count)")
     }
     
     func startFetching() {

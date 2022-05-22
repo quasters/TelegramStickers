@@ -11,9 +11,13 @@ import UIKit
 struct SelectedPhotosModel {
     
     
-    private var pkAdapter = PhotoKitAdapter()
+    var adapter: PhotoKitAdapter
     
-    var images:[UIImage] { pkAdapter.images }
+    var images: [UIImage]? //{ pkAdapter.images }
     
+    init(adapter: PhotoKitAdapter, images: [UIImage]?) {
+        self.images = images
+        self.adapter = adapter
+    }
     
 }
