@@ -16,7 +16,7 @@ protocol RouterProtocol {
     func showErrorController(code: Int, message: String)
     func showInfo()
     func showSelectedPhotos()
-    func closeSelectedPhotos(view: UIViewController)
+    func closeSelectedPhotos(for view: UICollectionViewController)
     func popToRoot()
 }
 
@@ -62,11 +62,9 @@ class Router: RouterProtocol {
         }
     }
     
-    func closeSelectedPhotos(view: UIViewController) {
-        if let navigationController = navigationController {
+    func closeSelectedPhotos(for view: UICollectionViewController) {
             view.dismiss(animated: true)
             popToRoot()
-        }
     }
     
     func showInfo() {

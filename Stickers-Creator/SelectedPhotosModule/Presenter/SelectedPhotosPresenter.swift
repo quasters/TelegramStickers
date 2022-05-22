@@ -25,7 +25,7 @@ class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
         self.router = router
     }
     
-    func tapOnCloseButton(view: UIViewController) {
-        router?.closeSelectedPhotos(view: view)
+    func tapOnCloseButton(for view: UICollectionViewController) {
+        router?.closeSelectedPhotos(for: view)
     }
 }
