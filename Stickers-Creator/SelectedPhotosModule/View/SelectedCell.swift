@@ -9,37 +9,24 @@ import Foundation
 import UIKit
 
 class SelectedCell: UICollectionViewCell {
-    private var imageView = UIImageView()
+    private var button = UIButton()
     
-    func setImage(image: UIImage) {
-        addSubview(imageView)
-        configureImageView()
-        setImageConstraints()
-        imageView.image = image
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureButton()
+        addSubview(button)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func set(image: UIImage) {
-        self.imageView.image = image
+    func setButton(image: UIImage?) {
+        button.setImage(image, for: .normal)
     }
     
-    private func configureImageView() {
-        //imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.width)
-        imageView.contentMode = .center
-        imageView.clipsToBounds = true
+    private func configureButton() {
+        button.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.width)
+        button.imageView?.contentMode = .scaleAspectFill
     }
-    
-    private func setImageConstraints() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.center = self.center
-        imageView.contentMode = .scaleAspectFit
-        //imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        //imageView.heightAnchor.constraint(equalToConstant: imageView.bounds.height).isActive = true
-        //imageView.widthAnchor.constraint(equalToConstant: imageView.bounds.width).isActive = true
-    }
-    
 }

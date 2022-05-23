@@ -1,23 +1,17 @@
+////
+////  Model.swift
+////  Stickers-Creator
+////
+////  Created by Наиль Буркеев on 23.05.2022.
+////
 //
-//  Model.swift
-//  Stickers-Creator
+//import Foundation
+//import UIKit
 //
-//  Created by Наиль Буркеев on 23.05.2022.
+//struct SelectedPhotosModel {
 //
-
-import Foundation
-import UIKit
-
-struct SelectedPhotosModel {
-    
-    
-    var adapter: PhotoKitAdapter
-    
-    var images: [UIImage]? //{ pkAdapter.images }
-    
-    init(adapter: PhotoKitAdapter, images: [UIImage]?) {
-        self.images = images
-        self.adapter = adapter
-    }
-    
-}
+//    private var pkAdapter = PhotoKitAdapter()
+//
+//    var images: [UIImage] { pkAdapter.images }
+//
+//}

@@ -94,10 +94,10 @@
             filePath = "Stickers-Creator/SelectedPhotosModule/View/SelectedPhotosViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "SelectedPhotosViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,8 +110,8 @@
             filePath = "Stickers-Creator/SelectedPhotosModule/View/SelectedPhotosViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "viewWillLayoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -119,15 +119,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "871EAB60-951A-4840-B138-70F3F0A3A8AE"
+            uuid = "C4D88609-46FF-4551-946F-0535E0AF439A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/SelectedPhotosModule/PhotoKitAdapter/PhotoKitAdapter.swift"
+            filePath = "Stickers-Creator/SelectedPhotosModule/View/SelectedPhotosViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "photoLibraryDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -135,16 +135,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "65BF1A57-F113-45D6-8D19-CC1858203A9F"
+            uuid = "D47742CF-C902-47DE-AADA-C9CACEA06514"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/SelectedPhotosModule/PhotoKitAdapter/PhotoKitAdapter.swift"
+            filePath = "Stickers-Creator/SelectedPhotosModule/View/SelectedPhotosViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "photoLibraryDidChange(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
