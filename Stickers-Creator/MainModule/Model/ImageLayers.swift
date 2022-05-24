@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photoes {
+struct Photos {
     static var isAllowCamera = false
     static var isAllowPhotoLibrary = false
     var savedImages: [SavedImage]

@@ -149,10 +149,10 @@
 		D1AE53122837A0BC00C038B6 /* SelectedPhotosModule */ = {
 			isa = PBXGroup;
 			children = (
-				D167F26E283ADB0700794A48 /* Model */,
-				D1AE53192837C39700C038B6 /* View */,
-				D167F26B283AAA0A00794A48 /* PhotoKitAdapter */,
 				D1AE531A2837C3AE00C038B6 /* Presenter */,
+				D167F26B283AAA0A00794A48 /* PhotoKitAdapter */,
+				D1AE53192837C39700C038B6 /* View */,
+				D167F26E283ADB0700794A48 /* Model */,
 			);
 			path = SelectedPhotosModule;
 			sourceTree = "<group>";

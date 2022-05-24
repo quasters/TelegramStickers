@@ -44,12 +44,14 @@ class AsselderBuilder: AsselderBuilderProtocol {
     func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController? {
         let navigation = UINavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
         let layout = UICollectionViewFlowLayout()
-        
+        let model = SelectedPhotosModel()
         let view = SelectedPhotosViewController(collectionViewLayout: layout)
+        let adapter = PhotoKitAdapter()
         //let view = SelectedPhotosNavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
         navigation.viewControllers = [view]
-        let presenter = SelectedPhotosPresenter(view: view, router: router)
+        let presenter = SelectedPhotosPresenter(view: view, router: router, model: model, adapter: adapter)
         
+        //adapter.presenter = presenter
         view.presenter = presenter
         return navigation
     }
