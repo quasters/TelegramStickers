@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SelectedCell: UICollectionViewCell {
-    private var button = UIButton()
+    var button = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +23,7 @@ class SelectedCell: UICollectionViewCell {
     
     func setButton(image: UIImage?) {
         button.setImage(image, for: .normal)
+        button.setImage(image, for: .highlighted)
     }
     
     private func configureButton() {

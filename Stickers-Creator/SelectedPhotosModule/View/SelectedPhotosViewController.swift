@@ -17,36 +17,14 @@ class SelectedPhotosViewController: UICollectionViewController {
     let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2) // Отступы
     
     var photos = [PHAsset]()
-    //var adapter = PhotoKitAdapter()
-    //var model: SelectedPhotosModel?
-    //
     
     var fetchResult: PHFetchResult<PHAsset>?
-    
-    
-    //var allPhotos:PHFetchResult<PHAsset>?
-            
-    //
-    
-    
-    override func  viewWillLayoutSubviews() {
-//        let image = UIImageView()
-//        image.image = UIImage(named: "tg-icon")
-//        image.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-//        image.contentMode = .scaleToFill
-//        image.center = view.center
-//        view.addSubview(image)
-//        createCollection()
-//        getPhoto()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
         self.collectionView!.register(SelectedCell.self, forCellWithReuseIdentifier: "id")
         startFetching()
-        //PHPhotoLibrary.shared().register(self)
-        //model = SelectedPhotosModel(adapter: phKitAdapter, images: photos)
     }
 
     
@@ -55,11 +33,6 @@ class SelectedPhotosViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //DispatchQueue.main.async {
-            //print("----------------\(self.adapter.images.count)")
-            //self.adapter.getImages()
-        //}
-        print("number of items: \(photos.count)")
         return photos.count
     }
     
@@ -67,19 +40,15 @@ class SelectedPhotosViewController: UICollectionViewController {
         let originalCell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath)
         guard let cell = originalCell as? SelectedCell else { originalCell.backgroundColor = .gray; return originalCell }
         
-
-        
         let asset = photos[indexPath.row]
         let manager = PHImageManager.default()
 
         let _ = manager.requestImage(for: asset,
                                          targetSize: CGSize(width: 400, height: 400),
                                          contentMode: .aspectFit, options: nil) { image, _ in
-            cell.setButton(image: image, action: <#T##UIAction#>)
+            cell.setButton(image: image)
+            cell.button.addTarget(self, action: #selector(self.backToMainVC(sender:)), for: .touchUpInside)
         }
-
-        //cell.setImage(image: image)
-        //print(image)
         return cell
     }
 
@@ -121,14 +90,10 @@ extension SelectedPhotosViewController: UICollectionViewDelegateFlowLayout {
 extension SelectedPhotosViewController {
     // MARK: - Configuration NavigationBar
     func configureNavigationBar() {
-        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC))
+        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC(sender:)))
         let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
         self.navigationItem.rightBarButtonItem = rightButton
         self.navigationItem.leftBarButtonItem = leftButton
-    }
-    
-    @objc func backToMainVC() {
-        presenter?.tapOnCloseButton(for: self)
     }
     
     // MARK: - Configure Action Sheet to do with Selecting Photo 
@@ -147,6 +112,10 @@ extension SelectedPhotosViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
+    }
+    
+    @objc func backToMainVC(sender: Any) {
+        presenter?.tapOnCloseButton(for: self)
     }
 }
 
