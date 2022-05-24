@@ -9,160 +9,111 @@ import UIKit
 import PhotosUI
 
 
-class SelectedPhotosViewController: UICollectionViewController {
+class SelectedPhotosCollectionViewController: UICollectionViewController {
     var presenter: SelectedPhotosPresenterInputProtocol?
-    var width: CGFloat?
     
+    private let cellIdentifier = "Cell"
+    //var width: CGFloat?
     let itemsPerRow: CGFloat = 3
     let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     
-    
-    var assets = [PHAsset]()
-    var fetchResult: PHFetchResult<PHAsset>?
-    
-    private let cellIdentifier = "Cell"
+    var fetchResult = PHFetchResult<PHAsset>() {
+        didSet {
+            if fetchResult.count == 0 {
+                self.collectionView.showEmptyCollectionNotice()
+            } else {
+                self.collectionView.restore()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRegisters()
         configureNavigationBar()
-        //var register = self.presenter?.changeObserverRegisterClass()
-        PHPhotoLibrary.shared().register(self)
-        self.startFetching()
-        //startFetching()
-        self.collectionView!.register(SelectedCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        startFetching()
     }
     
+    func setupRegisters() {
+        PHPhotoLibrary.shared().register(self)
+        self.collectionView!.register(SelectedCell.self, forCellWithReuseIdentifier: cellIdentifier)
+    }
 }
 
-extension SelectedPhotosViewController: SelectedPhotosViewPresenterOutputProtocol {
-    func updateCollection() {
-        self.collectionView.reloadData()
-    }
+extension SelectedPhotosCollectionViewController: SelectedPhotosViewPresenterOutputProtocol {
+
 }
 
 // MARK: UICollectionViewDataSource
-extension SelectedPhotosViewController {
+extension SelectedPhotosCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return assets.count //presenter?.getPhotos().count ?? 0
+        return fetchResult.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let originalCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         guard let cell = originalCell as? SelectedCell else { originalCell.backgroundColor = .gray; return originalCell }
         
-        let asset = assets[indexPath.row]
+        let asset = self.fetchResult[indexPath.row]
         let manager = PHImageManager.default()
-
         let _ = manager.requestImage(for: asset,
                                          targetSize: CGSize(width: 400, height: 400),
                                          contentMode: .aspectFit, options: nil) { image, _ in
-            cell.setButton(image: image)
-            cell.button.addTarget(self, action: #selector(self.backToMainVC(sender:)), for: .touchUpInside)
+            cell.setImage(image: image)
         }
-        
-        //let image = presenter?.getPhotos()[indexPath.row]
-        //cell.setButton(image: image)
-        //cell.button.addTarget(self, action: #selector(self.backToMainVC(sender:)), for: .touchUpInside)
+
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        backToMainVC()
     }
 }
 
 
 // MARK: PHPhotoLibraryChangeObserver
-extension SelectedPhotosViewController: PHPhotoLibraryChangeObserver {
+extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
     func startFetching() {
         
-        PHPhotoLibrary.shared().register(self)
         let fetchResultOptions = PHFetchOptions()
         fetchResultOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         self.fetchResult = PHAsset.fetchAssets(with: fetchResultOptions)
-
-        fetchResult?.enumerateObjects { asset, count, stop in
-            self.assets.append(asset)
-        }
-        self.collectionView.reloadData()
     }
 
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        guard let changes = changeInstance.changeDetails(for: self.fetchResult!) else { return }
-        DispatchQueue.main.async {
-            self.fetchResult = changes.fetchResultAfterChanges
-            self.assets = []
-            self.fetchResult?.enumerateObjects { object, count, stop in
-                self.assets.append(object)
+        DispatchQueue.main.sync {
+            guard let collectionView = self.collectionView else { return }
+            if let changes = changeInstance.changeDetails(for: self.fetchResult) {
+                self.fetchResult = changes.fetchResultAfterChanges
+                if changes.hasIncrementalChanges {
+                    
+                    collectionView.performBatchUpdates {
+                        if let removed = changes.removedIndexes {
+                            collectionView.deleteItems(at: removed.map{ IndexPath(item: $0, section: 0) })
+                        }
+                        if let inserted = changes.insertedIndexes, inserted.count > 0 {
+                            collectionView.insertItems(at: inserted.map{ IndexPath(item: $0, section: 0) })
+                        }
+                        if let changed = changes.changedIndexes, changed.count > 0 {
+                            collectionView.reloadItems(at: changed.map{ IndexPath(item: $0, section: 0) })
+                        }
+                        changes.enumerateMoves { fromIndex, toIndex in
+                            collectionView.moveItem(at: IndexPath(item: fromIndex, section: 0),
+                                                    to: IndexPath(item: toIndex, section: 0))
+                        }
+                    }
+                    
+                } else {
+                    collectionView.reloadData()
+                }
             }
-            self.collectionView.reloadData()
         }
     }
-    
-//    func startFetching() {
-//        let fetchResultOptions = PHFetchOptions()
-//        fetchResultOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-//        var photos = [UIImage?]()
-//        DispatchQueue.main.async {
-//            let fetchResult = PHAsset.fetchAssets(with: fetchResultOptions)
-//            fetchResult.enumerateObjects { asset, count, stop in
-//                let photo = self.getImage(asset: asset)
-//                photos.append(photo)
-//            }
-//            self.presenter?.setPhotos(photos: photos, fetchResult: fetchResult)
-//        }
-//    }
-//
-//    func photoLibraryDidChange(_ changeInstance: PHChange) {
-//        guard let presenter = presenter else { return }
-//
-//        var photos = presenter.getPhotos()
-//        var fetchResult = presenter.getFetchResult()
-//
-//        guard let changes = changeInstance.changeDetails(for: fetchResult!) else { return }
-//        if !changes.hasIncrementalChanges { return }
-//
-//        DispatchQueue.main.async {
-//            fetchResult = changes.fetchResultAfterChanges
-//            if let removeIndexes = changes.removedIndexes {
-//                for removeIndex in removeIndexes {
-//                    photos.remove(at: removeIndex)
-//                }
-//            }
-//            if let insertIndexes = changes.insertedIndexes {
-//                for insertIndex in insertIndexes {
-//                    guard let asset = fetchResult?[insertIndex] else { return }
-//                    let image = self.getImage(asset: asset)
-//                    photos.insert(image, at: insertIndex)
-//                }
-//            }
-//            if let changedIndexes = changes.changedIndexes {
-//                for changedIndex in changedIndexes {
-//                    guard let asset = fetchResult?[changedIndex] else { return }
-//                    photos[changedIndex] = self.getImage(asset: asset)
-//                }
-//            }
-//            changes.enumerateMoves { fromIndex, toIndex in
-//                guard let asset = fetchResult?[toIndex] else { return }
-//                photos.remove(at: fromIndex)
-//                let image = self.getImage(asset: asset)
-//                photos.insert(image, at: toIndex)
-//            }
-//            print(photos.count)
-//            presenter.setPhotos(photos: photos, fetchResult: fetchResult)
-//        }
-//    }
-//
-//    private func getImage(asset: PHAsset) -> UIImage? {
-//        let manager = PHImageManager.default()
-//        var photo: UIImage?
-//        let _ = manager.requestImage(for: asset,
-//                                     targetSize: CGSize(width: 400, height: 400),
-//                                     contentMode: .aspectFit, options: nil) { image, _ in
-//            photo = image
-//        }
-//        return photo
-//    }
 }
 
 // MARK: - Configuration NavigationBar
-extension SelectedPhotosViewController {
+extension SelectedPhotosCollectionViewController {
     func configureNavigationBar() {
         let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC))
         let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
@@ -192,15 +143,13 @@ extension SelectedPhotosViewController {
         PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
     }
     
-// FIXME: - add sending image
-    @objc func backToMainVC(sender: UIButton? = nil) {
-        let _ = sender?.imageView?.image
+    @objc func backToMainVC() {
         presenter?.tapOnCloseButton(for: self)
     }
 }
 
 // MARK: - Configuration Cells
-extension SelectedPhotosViewController: UICollectionViewDelegateFlowLayout {
+extension SelectedPhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     // Cell Size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let peddingWidth = sectionInserts.left * (itemsPerRow + 1)
@@ -222,5 +171,39 @@ extension SelectedPhotosViewController: UICollectionViewDelegateFlowLayout {
     // Distance between objects
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInserts.left
+    }
+}
+
+// MARK: - EmptyCollectionNotice
+extension UICollectionView {
+    func showEmptyCollectionNotice() {
+        let width = self.bounds.width
+        let height = self.bounds.height
+        
+        let textVC = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        let title = setEmptyCollectionMessage("You have no Photos", size: 30, offset: -37)
+        let message = setEmptyCollectionMessage("You've given access to only a select number of photos. You can manage it with the Edit button above.", size: 17, offset: +25)
+        textVC.addSubview(title)
+        textVC.addSubview(message)
+        self.backgroundView = textVC
+    }
+    
+    func setEmptyCollectionMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
+        let width = self.bounds.width - 40
+        let height = self.bounds.height
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        messageLabel.text = message
+        messageLabel.textColor = .gray
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "Arial", size: size)
+        messageLabel.sizeToFit()
+        messageLabel.center.x = self.center.x
+        messageLabel.center.y = self.center.y + offset
+        return messageLabel
+    }
+    
+    func restore() {
+        self.backgroundView = nil
     }
 }

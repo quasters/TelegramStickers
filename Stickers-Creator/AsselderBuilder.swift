@@ -11,7 +11,6 @@ import UIKit
 protocol AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController?
     func createInfoModule(router: RouterProtocol) -> UIViewController?
-//    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController?
     func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController?
     func createErrorController(router: RouterProtocol, code: Int, message: String) -> UIViewController
 }
@@ -34,24 +33,14 @@ class AsselderBuilder: AsselderBuilderProtocol {
         return view
     }
     
-//    func createSelectedPhotosModule(router: RouterProtocol) -> UIViewController? {
-//        let view = SelectedPhotosViewController(nibName: "SelectedPhotosViewController", bundle: nil)
-//        let presenter = SelectedPhotosPresenter(view: view, router: router)
-//        view.presenter = presenter
-//        return view
-//    }
-    
     func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController? {
         let navigation = UINavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
         let layout = UICollectionViewFlowLayout()
-        let model = SelectedPhotosModel()
-        let view = SelectedPhotosViewController(collectionViewLayout: layout)
-        let adapter = PhotoKitAdapter()
-        //let view = SelectedPhotosNavigationController(nibName: "SelectedPhotosNavigationController", bundle: nil)
-        navigation.viewControllers = [view]
-        let presenter = SelectedPhotosPresenter(view: view, router: router, model: model, adapter: adapter)
+        let view = SelectedPhotosCollectionViewController(collectionViewLayout: layout)
         
-        //adapter.presenter = presenter
+        navigation.viewControllers = [view]
+        let presenter = SelectedPhotosPresenter(view: view, router: router)
+        
         view.presenter = presenter
         return navigation
     }
