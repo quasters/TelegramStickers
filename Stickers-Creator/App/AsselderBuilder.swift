@@ -16,7 +16,7 @@ protocol AsselderBuilderProtocol {
 }
 
 class AsselderBuilder: AsselderBuilderProtocol {
-    var mainPresenter: MainPresenter?
+    var mainPresenter: MainPresenter? // SelectedPhotosPresenterDelegate
     
     func createMainModule(router: RouterProtocol) -> UIViewController? {
         let view = MainViewController()
@@ -45,7 +45,7 @@ class AsselderBuilder: AsselderBuilderProtocol {
         let presenter = SelectedPhotosPresenter(view: view, router: router)
         
         view.presenter = presenter
-        presenter.receiverOfImageViaMainView = mainPresenter // Delegate
+        presenter.receiverOfImageViaMainView = mainPresenter
         
         return navigation
     }

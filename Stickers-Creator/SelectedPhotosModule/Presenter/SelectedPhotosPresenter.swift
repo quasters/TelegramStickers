@@ -9,21 +9,6 @@ import Foundation
 import Photos
 import UIKit
 
-protocol SelectedPhotosPresenterInputProtocol: AnyObject {
-    init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol)
-    func moveToRoot(for view: UICollectionViewController)
-    func moveToRoot(for view: UICollectionViewController, image: UIImage)
-}
-
-protocol SelectedPhotosViewPresenterOutputProtocol: AnyObject {
-    func tapOnCloseButton()
-    func choseImage(image: UIImage)
-}
-
-protocol SelectedPhotosPresenterDelegate {
-    func setImage(image: UIImage)
-}
-
 class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
     var receiverOfImageViaMainView: SelectedPhotosPresenterDelegate?
     
@@ -35,6 +20,25 @@ class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
         self.router = router
     }
     
+    func tapOnEditButton() {
+        view?.showActionSheet()
+    }
+    
+    func selectMorePhotos() {
+        view?.pickMorePhotos()
+    }
+    
+    func changedLibrary(currentQuantity: Int) {
+        currentQuantity > 0 ? view?.hideNotice() : view?.showNotice()
+    }
+    
+    func moveToSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     func moveToRoot(for view: UICollectionViewController) {
         router?.closeSelectedPhotos(for: view)
     }
@@ -43,5 +47,6 @@ class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
         receiverOfImageViaMainView?.setImage(image: image)
         moveToRoot(for: view)
     }
+
 }
 

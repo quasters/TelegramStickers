@@ -1,35 +1,13 @@
 //
-//  Presenter.swift
+//  MainPresenter.swift
 //  Stickers-Creator
 //
-//  Created by Наиль Буркеев on 17.05.2022.
+//  Created by Наиль Буркеев on 25.05.2022.
 //
 
 import Foundation
-import Photos
 import UIKit
-
-protocol MainPresenterInputProtocol: AnyObject {
-    init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel)
-    
-    func tapOnInfoButton()
-    func getCameraAccessPermission(complition: @escaping (Bool) -> Void)
-    func getPhotoLibraryAccessPermission(complition: @escaping (PHAuthorizationStatus) -> Void)
-    func showSelectedPhotos()
-    
-    //func setImage(image: UIImage)
-}
-
-protocol MainViewPresenterOutputProtocol: AnyObject {
-    func setImageView(image: UIImage)
-}
-
-extension MainPresenter: SelectedPhotosPresenterDelegate {
-    func setImage(image: UIImage) {
-        self.model.photo = image
-        view?.setImageView(image: model.photo!)
-    }
-}
+import Photos
 
 class MainPresenter: MainPresenterInputProtocol {
     weak var view: MainViewPresenterOutputProtocol?
@@ -45,15 +23,12 @@ class MainPresenter: MainPresenterInputProtocol {
         self.model = mainModel
     }
     
-    
-    
-//    func setImage(image: UIImage) {
-//        model.photo = image
-//        view?.setImage(image: image)
-//    }
-    
     func tapOnInfoButton() {
         router?.showInfo()
+    }
+    
+    func tapOnCameraButton() {
+        view?.showActionSheet()
     }
     
     func getCameraAccessPermission(complition: @escaping (Bool) -> Void) {
@@ -76,4 +51,14 @@ class MainPresenter: MainPresenterInputProtocol {
         router?.showSelectedPhotos()
     }
     
+    func setImage(image: UIImage?) {
+        model.photo = image
+    }
+}
+
+extension MainPresenter: SelectedPhotosPresenterDelegate {
+    func setImage(image: UIImage) {
+        self.model.photo = image
+        view?.setImageView(image: model.photo!)
+    }
 }

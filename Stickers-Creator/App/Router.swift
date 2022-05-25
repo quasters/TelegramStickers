@@ -13,13 +13,11 @@ protocol RouterProtocol {
     var assemblyBuilder: AsselderBuilderProtocol? { get set }
     
     func initialViewController()
-    func showErrorController(code: Int, message: String)
-    func showInfo()
-    
     func showSelectedPhotos()
     func closeSelectedPhotos(for view: UICollectionViewController)
-    //func closeSelectedPhotos(for view: UICollectionViewController, with image: UIImage)
+    func showInfo()
     func popToRoot()
+    func showErrorController(code: Int, message: String)
 }
 
 class Router: RouterProtocol {
@@ -38,13 +36,6 @@ class Router: RouterProtocol {
         }
     }
     
-    func showErrorController(code: Int, message: String) {
-        if let navigationController = navigationController {
-            guard let errorVC = assemblyBuilder?.createErrorController(router: self, code: code, message: message) else { return }
-            navigationController.pushViewController(errorVC, animated: false)
-        }
-    }
-    
     func showSelectedPhotos() {
         if let navigationController = navigationController {
             guard let selectedPhotosVC = assemblyBuilder?.createSelectedPhotosModule(router: self) else { return }
@@ -59,10 +50,6 @@ class Router: RouterProtocol {
         popToRoot()
     }
     
-//    func closeSelectedPhotos(for view: UICollectionViewController, with image: UIImage) {
-//        view.dismiss(animated: true)
-//    }
-    
     func showInfo() {
         if let navigationController = navigationController {
             guard let infoVC = assemblyBuilder?.createInfoModule(router: self) else { return }
@@ -75,5 +62,11 @@ class Router: RouterProtocol {
             navigationController.popToRootViewController(animated: true)
         }
     }
-
+    
+    func showErrorController(code: Int, message: String) {
+        if let navigationController = navigationController {
+            guard let errorVC = assemblyBuilder?.createErrorController(router: self, code: code, message: message) else { return }
+            navigationController.pushViewController(errorVC, animated: false)
+        }
+    }
 }

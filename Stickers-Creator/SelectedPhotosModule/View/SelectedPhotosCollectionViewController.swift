@@ -12,18 +12,12 @@ import PhotosUI
 class SelectedPhotosCollectionViewController: UICollectionViewController {
     var presenter: SelectedPhotosPresenterInputProtocol?
     
-    private let cellIdentifier = "Cell"
-    //var width: CGFloat?
-    let itemsPerRow: CGFloat = 3
-    let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-    
-    var fetchResult = PHFetchResult<PHAsset>() {
+    fileprivate let cellIdentifier = "Cell"
+    fileprivate let itemsPerRow: CGFloat = 3
+    fileprivate let sectionInserts = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    fileprivate var fetchResult = PHFetchResult<PHAsset>() {
         didSet {
-            if fetchResult.count == 0 {
-                self.collectionView.showEmptyCollectionNotice()
-            } else {
-                self.collectionView.restore()
-            }
+            presenter?.changedLibrary(currentQuantity: fetchResult.count)
         }
     }
     
@@ -40,16 +34,30 @@ class SelectedPhotosCollectionViewController: UICollectionViewController {
     }
 }
 
+
+
+// MARK: - SelectedPhotosViewPresenterOutputProtocol
 extension SelectedPhotosCollectionViewController: SelectedPhotosViewPresenterOutputProtocol {
-    @objc func tapOnCloseButton() {
-        presenter?.moveToRoot(for: self)
+    func showActionSheet() {
+        showPhotoManagerActionSheet()
     }
-    
+        
     func choseImage(image: UIImage) {
         presenter?.moveToRoot(for: self, image: image)
     }
+    
+    func pickMorePhotos() {
+        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+    }
+    
+    func showNotice() {
+        showEmptyCollectionNotice()
+    }
+    
+    func hideNotice() {
+        restore()
+    }
 }
-
 
 // MARK: UICollectionViewDataSource
 extension SelectedPhotosCollectionViewController {
@@ -82,10 +90,8 @@ extension SelectedPhotosCollectionViewController {
             image = img
             self.choseImage(image: image)
         }
-        //print(image.size)
     }
 }
-
 
 // MARK: PHPhotoLibraryChangeObserver
 extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
@@ -128,31 +134,31 @@ extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
 extension SelectedPhotosCollectionViewController {
     private func configureNavigationBar() {
         let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(tapOnCloseButton))
-        let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tapOnEditButton))
         self.navigationItem.rightBarButtonItem = rightButton
         self.navigationItem.leftBarButtonItem = leftButton
     }
     
-    // Configure Action Sheet to do with Selecting Photo
-    @objc func showActionSheet() {
+    @objc fileprivate func tapOnCloseButton() {
+        presenter?.moveToRoot(for: self)
+    }
+    
+    @objc fileprivate func tapOnEditButton() {
+        presenter?.tapOnEditButton()
+    }
+    
+    fileprivate func showPhotoManagerActionSheet() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
         alert.addAction(UIAlertAction(title: "Select More Photos", style: .default, handler: { (UIAlertAction) in
-            self.pickMorePhotos()
+            self.presenter?.selectMorePhotos()
         }))
         alert.addAction(UIAlertAction(title: "Change Settings", style: .default, handler: { (UIAlertAction) in
-            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
+            self.presenter?.moveToSettings()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
-    }
-    
-    private func pickMorePhotos() {
-        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
     }
 }
 
@@ -183,22 +189,22 @@ extension SelectedPhotosCollectionViewController: UICollectionViewDelegateFlowLa
 }
 
 // MARK: - EmptyCollectionNotice
-extension UICollectionView {
-    func showEmptyCollectionNotice() {
-        let width = self.bounds.width
-        let height = self.bounds.height
+extension SelectedPhotosCollectionViewController {
+    fileprivate func showEmptyCollectionNotice() {
+        let width = self.collectionView.bounds.width
+        let height = self.collectionView.bounds.height
         
         let textVC = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         let title = setEmptyCollectionMessage("You have no Photos", size: 30, offset: -37)
         let message = setEmptyCollectionMessage("You've given access to only a select number of photos. You can manage it with the Edit button above.", size: 17, offset: +25)
         textVC.addSubview(title)
         textVC.addSubview(message)
-        self.backgroundView = textVC
+        self.collectionView.backgroundView = textVC
     }
     
     private func setEmptyCollectionMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
-        let width = self.bounds.width - 40
-        let height = self.bounds.height
+        let width = self.collectionView.bounds.width - 40
+        let height = self.collectionView.bounds.height
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
         messageLabel.text = message
         messageLabel.textColor = .gray
@@ -206,12 +212,12 @@ extension UICollectionView {
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont(name: "Arial", size: size)
         messageLabel.sizeToFit()
-        messageLabel.center.x = self.center.x
-        messageLabel.center.y = self.center.y + offset
+        messageLabel.center.x = self.collectionView.center.x
+        messageLabel.center.y = self.collectionView.center.y + offset
         return messageLabel
     }
     
-    func restore() {
-        self.backgroundView = nil
+    fileprivate func restore() {
+        self.collectionView.backgroundView = nil
     }
 }

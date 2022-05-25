@@ -37,8 +37,7 @@ extension MainViewController: PHPickerViewControllerDelegate {
             result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
-                        self.imageView.image = image
-                        self.view.addSubview(self.imageView)
+                        self.presenter?.setImage(image: image)
                     }
                 }
             }
@@ -64,37 +63,15 @@ extension MainViewController: PHPickerViewControllerDelegate {
                     self.present(vc, animated: true)
                 case .limited:
                     self.presenter?.showSelectedPhotos()
-//                    if #available(iOS 15, *) {
-//
-//                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self) { assets in
-//
-//                        }
-//                    } else {
-//                        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-//
-//
-//                        //PHPhotoLibraryChangeObserver.photoLibraryDidChange(newPhotos)
-//                    }
                 default:
                     fatalError("Unknown PHAuthorizationStatus")
                 }
                 
             } else {
-// FIXME: - Add and check if it works +  add check permission
-                
-//                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//                    let imagePickerController = UIImagePickerController()
-//                    imagePickerController.delegate = self
-//                    imagePickerController.sourceType = .photoLibrary
-//                    self.present(imagePickerController, animated: true)
-//                }
+                //FIXME: - Add realization for iOS earlier than 14
                 fatalError("iOS version lower than 14.0")
             }
         })
-        
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        self.dismiss(animated: true)
-//    }
     }
 }
 
@@ -102,8 +79,7 @@ extension MainViewController: PHPickerViewControllerDelegate {
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        imageView.image = image
-        view.addSubview(imageView)
+        presenter?.setImage(image: image)
         self.dismiss(animated: true)
     }
     

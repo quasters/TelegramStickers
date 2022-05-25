@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SelectedCell: UICollectionViewCell {
-    var photo = UIImageView()
+    private var photo = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
