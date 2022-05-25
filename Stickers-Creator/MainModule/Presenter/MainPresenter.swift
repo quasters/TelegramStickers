@@ -11,10 +11,10 @@ import Photos
 
 class MainPresenter: MainPresenterInputProtocol {
     weak var view: MainViewPresenterOutputProtocol?
-    var router: RouterProtocol?
-    var model: MainModel
-    var accessManager: AccessManagerProtocol?
-    var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
+    fileprivate var router: RouterProtocol?
+    fileprivate var model: MainModel
+    fileprivate var accessManager: AccessManagerProtocol?
+    fileprivate var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
     
     required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel) {
         self.view = view
@@ -45,6 +45,26 @@ class MainPresenter: MainPresenterInputProtocol {
                 complition(status)
             }
         })
+    }
+    
+    func checkCameraAccessPermission() {
+        view?.checkAccessToCamera()
+    }
+    
+    func checkLibraryAccessPermission() {
+        view?.checkAccessToLibrary()
+    }
+    
+    func callWarningAlert(message: String, goTo applicationSettings: Bool) {
+        applicationSettings ? view?.showWarningAlertToApplicationSettings(message: message) : view?.showWarningAlert(message: message)
+    }
+    
+    func callGallery() {
+        view?.openGallery()
+    }
+    
+    func callCamera() {
+        view?.openCamera()
     }
     
     func showSelectedPhotos() {

@@ -17,12 +17,29 @@ protocol MainPresenterInputProtocol: AnyObject {
     
     func getCameraAccessPermission(complition: @escaping (Bool) -> Void)
     func getPhotoLibraryAccessPermission(complition: @escaping (PHAuthorizationStatus) -> Void)
-    func showSelectedPhotos()
     
+    func checkLibraryAccessPermission()
+    func checkCameraAccessPermission()
+    
+    func callWarningAlert(message: String, goTo applicationSettings: Bool)
+    func callGallery()
+    func callCamera()
+    
+    func showSelectedPhotos()
     func setImage(image: UIImage?)
 }
 
 protocol MainViewPresenterOutputProtocol: AnyObject {
     func setImageView(image: UIImage)
+    
     func showActionSheet()
+    
+    func checkAccessToCamera()
+    func checkAccessToLibrary()
+    
+    func showWarningAlert(message: String)
+    func showWarningAlertToApplicationSettings(message: String)
+    
+    func openGallery()
+    func openCamera()
 }

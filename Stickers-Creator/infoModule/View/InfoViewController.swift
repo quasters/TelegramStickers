@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class InfoViewController: UIViewController {
-    private var infoTableView = UITableView()
+    fileprivate var infoTableView = UITableView()
     var presenter: InfoPresenterInputProtocol?
     
     private let cellIdentifier = "Cell"

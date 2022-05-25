@@ -10,7 +10,6 @@ import UIKit
 
 protocol InfoPresenterInputProtocol: AnyObject {
     func followTheLink(username: String)
-    
     func getSectionLabel(section: Int) -> String
     func getRowLabel(section: Int, row: Int) -> String
     func getSectionsCount() -> Int
@@ -23,13 +22,13 @@ protocol InfoViewPresenterOutputProtocol: AnyObject {
 
 class InfoPresenter: InfoPresenterInputProtocol {
     weak var view: InfoViewPresenterOutputProtocol?
-    var router: RouterProtocol?
-    var infoModel: InfoModel
+    fileprivate var router: RouterProtocol?
+    fileprivate var infoModel: InfoModel
+    
     init(view: InfoViewPresenterOutputProtocol, router: RouterProtocol, infoModel: InfoModel){
         self.router = router
         self.infoModel = infoModel
     }
-    
     
     func getSectionLabel(section: Int) -> String {
         return infoModel.groupSections[section]
@@ -47,7 +46,6 @@ class InfoPresenter: InfoPresenterInputProtocol {
         return infoModel.itemRows[section].count
     }
     
-
     func followTheLink(username: String) {
         let appURL = URL(string: "tg://resolve?domain=\(username)")!
         let webURL = URL(string: "https://t.me/\(username)")!

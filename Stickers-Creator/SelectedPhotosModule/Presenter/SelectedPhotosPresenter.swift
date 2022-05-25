@@ -10,10 +10,9 @@ import Photos
 import UIKit
 
 class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
-    var receiverOfImageViaMainView: SelectedPhotosPresenterDelegate?
-    
     weak var view: SelectedPhotosViewPresenterOutputProtocol?
-    var router: RouterProtocol?
+    var receiverOfImageViaMainView: SelectedPhotosPresenterDelegate?
+    fileprivate var router: RouterProtocol?
     
     required init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol) {
         self.view = view
