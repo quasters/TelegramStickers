@@ -6,13 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
-struct Photos {
-    static var isAllowCamera = false
-    static var isAllowPhotoLibrary = false
-    var savedImages: [SavedImage]
+struct MainModel {
+    var photo: UIImage?
 }
 
-struct SavedImage {
-    var path: String
-}

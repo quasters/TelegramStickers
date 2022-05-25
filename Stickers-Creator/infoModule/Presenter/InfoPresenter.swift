@@ -18,7 +18,7 @@ protocol InfoPresenterInputProtocol: AnyObject {
 }
 
 protocol InfoViewPresenterOutputProtocol: AnyObject {
-    // nothing now
+    func tappedOnCell(username: String)
 }
 
 class InfoPresenter: InfoPresenterInputProtocol {

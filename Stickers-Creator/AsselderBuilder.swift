@@ -16,12 +16,15 @@ protocol AsselderBuilderProtocol {
 }
 
 class AsselderBuilder: AsselderBuilderProtocol {
+    var mainPresenter: MainPresenter?
     
     func createMainModule(router: RouterProtocol) -> UIViewController? {
         let view = MainViewController()
         let accessManager = AccessManager()
-        let presenter = MainPresenter(view: view, router: router, accessManager: accessManager)
+        let model = MainModel()
+        let presenter = MainPresenter(view: view, router: router, accessManager: accessManager, mainModel: model)
         view.presenter = presenter
+        self.mainPresenter = presenter
         return view
     }
     
@@ -42,6 +45,8 @@ class AsselderBuilder: AsselderBuilderProtocol {
         let presenter = SelectedPhotosPresenter(view: view, router: router)
         
         view.presenter = presenter
+        presenter.receiverOfImageViaMainView = mainPresenter // Delegate
+        
         return navigation
     }
     

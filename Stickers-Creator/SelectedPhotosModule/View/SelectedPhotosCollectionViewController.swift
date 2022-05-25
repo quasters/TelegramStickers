@@ -41,8 +41,15 @@ class SelectedPhotosCollectionViewController: UICollectionViewController {
 }
 
 extension SelectedPhotosCollectionViewController: SelectedPhotosViewPresenterOutputProtocol {
-
+    @objc func tapOnCloseButton() {
+        presenter?.moveToRoot(for: self)
+    }
+    
+    func choseImage(image: UIImage) {
+        presenter?.moveToRoot(for: self, image: image)
+    }
 }
+
 
 // MARK: UICollectionViewDataSource
 extension SelectedPhotosCollectionViewController {
@@ -61,21 +68,28 @@ extension SelectedPhotosCollectionViewController {
                                          contentMode: .aspectFit, options: nil) { image, _ in
             cell.setImage(image: image)
         }
-
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        backToMainVC()
+        let asset = self.fetchResult[indexPath.row]
+        let manager = PHImageManager.default()
+        var image = UIImage()
+        let _ = manager.requestImage(for: asset,
+                                         targetSize: CGSize(width: 400, height: 400),
+                                         contentMode: .aspectFit, options: nil) { img, _ in
+            guard let img = img else { return }
+            image = img
+            self.choseImage(image: image)
+        }
+        //print(image.size)
     }
 }
 
 
 // MARK: PHPhotoLibraryChangeObserver
 extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
-    func startFetching() {
-        
+    private func startFetching() {
         let fetchResultOptions = PHFetchOptions()
         fetchResultOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         self.fetchResult = PHAsset.fetchAssets(with: fetchResultOptions)
@@ -87,7 +101,6 @@ extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
             if let changes = changeInstance.changeDetails(for: self.fetchResult) {
                 self.fetchResult = changes.fetchResultAfterChanges
                 if changes.hasIncrementalChanges {
-                    
                     collectionView.performBatchUpdates {
                         if let removed = changes.removedIndexes {
                             collectionView.deleteItems(at: removed.map{ IndexPath(item: $0, section: 0) })
@@ -103,7 +116,6 @@ extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
                                                     to: IndexPath(item: toIndex, section: 0))
                         }
                     }
-                    
                 } else {
                     collectionView.reloadData()
                 }
@@ -114,8 +126,8 @@ extension SelectedPhotosCollectionViewController: PHPhotoLibraryChangeObserver {
 
 // MARK: - Configuration NavigationBar
 extension SelectedPhotosCollectionViewController {
-    func configureNavigationBar() {
-        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(backToMainVC))
+    private func configureNavigationBar() {
+        let rightButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(tapOnCloseButton))
         let leftButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showActionSheet))
         self.navigationItem.rightBarButtonItem = rightButton
         self.navigationItem.leftBarButtonItem = leftButton
@@ -139,12 +151,8 @@ extension SelectedPhotosCollectionViewController {
         self.present(alert, animated: true)
     }
     
-    func pickMorePhotos() {
+    private func pickMorePhotos() {
         PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-    }
-    
-    @objc func backToMainVC() {
-        presenter?.tapOnCloseButton(for: self)
     }
 }
 
@@ -188,7 +196,7 @@ extension UICollectionView {
         self.backgroundView = textVC
     }
     
-    func setEmptyCollectionMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
+    private func setEmptyCollectionMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
         let width = self.bounds.width - 40
         let height = self.bounds.height
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))

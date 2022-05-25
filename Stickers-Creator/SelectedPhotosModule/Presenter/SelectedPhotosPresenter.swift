@@ -11,14 +11,22 @@ import UIKit
 
 protocol SelectedPhotosPresenterInputProtocol: AnyObject {
     init(view: SelectedPhotosViewPresenterOutputProtocol, router: RouterProtocol)
-    func tapOnCloseButton(for view: UICollectionViewController)
+    func moveToRoot(for view: UICollectionViewController)
+    func moveToRoot(for view: UICollectionViewController, image: UIImage)
 }
 
 protocol SelectedPhotosViewPresenterOutputProtocol: AnyObject {
+    func tapOnCloseButton()
+    func choseImage(image: UIImage)
+}
 
+protocol SelectedPhotosPresenterDelegate {
+    func setImage(image: UIImage)
 }
 
 class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
+    var receiverOfImageViaMainView: SelectedPhotosPresenterDelegate?
+    
     weak var view: SelectedPhotosViewPresenterOutputProtocol?
     var router: RouterProtocol?
     
@@ -27,7 +35,13 @@ class SelectedPhotosPresenter: SelectedPhotosPresenterInputProtocol {
         self.router = router
     }
     
-    func tapOnCloseButton(for view: UICollectionViewController) {
+    func moveToRoot(for view: UICollectionViewController) {
         router?.closeSelectedPhotos(for: view)
     }
+    
+    func moveToRoot(for view: UICollectionViewController, image: UIImage) {
+        receiverOfImageViaMainView?.setImage(image: image)
+        moveToRoot(for: view)
+    }
 }
+

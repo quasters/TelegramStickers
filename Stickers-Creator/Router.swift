@@ -15,8 +15,10 @@ protocol RouterProtocol {
     func initialViewController()
     func showErrorController(code: Int, message: String)
     func showInfo()
+    
     func showSelectedPhotos()
     func closeSelectedPhotos(for view: UICollectionViewController)
+    //func closeSelectedPhotos(for view: UICollectionViewController, with image: UIImage)
     func popToRoot()
 }
 
@@ -53,9 +55,13 @@ class Router: RouterProtocol {
     }
     
     func closeSelectedPhotos(for view: UICollectionViewController) {
-            view.dismiss(animated: true)
-            popToRoot()
+        view.dismiss(animated: true)
+        popToRoot()
     }
+    
+//    func closeSelectedPhotos(for view: UICollectionViewController, with image: UIImage) {
+//        view.dismiss(animated: true)
+//    }
     
     func showInfo() {
         if let navigationController = navigationController {
@@ -69,6 +75,5 @@ class Router: RouterProtocol {
             navigationController.popToRootViewController(animated: true)
         }
     }
-    
-    
+
 }
