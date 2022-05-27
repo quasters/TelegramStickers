@@ -72,13 +72,23 @@ class MainPresenter: MainPresenterInputProtocol {
     }
     
     func setImage(image: UIImage?) {
-        model.photo = image
+        if let image = image {
+            self.setImage(image: image)
+        }
+    }
+    
+    func getImage() -> UIImage? {
+        return model.photo
+    }
+    
+    func reloadWorkspace() {
+        
     }
 }
 
 extension MainPresenter: SelectedPhotosPresenterDelegate {
     func setImage(image: UIImage) {
         self.model.photo = image
-        view?.setImageView(image: model.photo!)
+        view?.loadImageToWorkspace(image: image)
     }
 }

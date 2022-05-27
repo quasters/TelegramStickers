@@ -10,10 +10,10 @@ import PhotosUI
 
 // MARK: - MainViewPresenterOutputProtocol
 extension MainViewController: MainViewPresenterOutputProtocol {
-    func setImageView(image: UIImage) {
+//    func setImageView(image: UIImage) {
 //        let y = Float((self.view.window?.windowScene?.statusBarManager?.statusBarFrame.minY) ?? 0) + Float(self.navigationController?.navigationBar.frame.minY ?? 0)
 //        let newImage = UIImageView(frame: CGRect(x: 0, y: CGFloat(y), width: image.size.width, height: image.size.height))
-    }
+//    }
     
     func showActionSheet() {
         showCameraActionSheet()
@@ -59,5 +59,10 @@ extension MainViewController: MainViewPresenterOutputProtocol {
     
     func checkAccessToLibrary() {
         requestLibraryPermission()
+    }
+    
+    func loadImageToWorkspace(image: UIImage) {
+        self.textVC.removeFromSuperview()
+        self.configurateWorkspace()
     }
 }

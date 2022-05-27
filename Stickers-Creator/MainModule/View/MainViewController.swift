@@ -13,36 +13,111 @@ class MainViewController: UIViewController {
 
     var presenter: MainPresenterInputProtocol?
     
-    fileprivate let bottomButtonsImages = [ "pencil.circle", "pencil.tip.crop.circle.badge.minus", "eye.circle", "folder.circle"]
+    var workspaceScrollView = UIScrollView()
+    var textVC = UIView()
+    var stackView = UIStackView()
+    
+    fileprivate let bottomButtonsImages = [ "pencil.circle", "scissors.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationView()
+        setUpBottomButtons()
+        showEmptyScrollViewNotice()
+        //configurateWorkspace()
     }
 
 
 }
 
-//extension MainViewController {
-//
-//
-//    func setUpBottomButtons() {
-//        let stackView = UIStackView()
-//    }
-//
-//    func setUpButtons() -> [UIButton] {
-//        for buttonImage in bottomButtonsImages {
-//
-//        }
-//    }
-//
-//    func configurateButtons(image: String) -> UIButton {
-//        var button = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
-//    }
-//}
+// MARK: - Bottom buttons
+extension MainViewController {
 
+    func setUpBottomButtons() {
+        let buttons = setUpButtons()
+        stackView = UIStackView(arrangedSubviews: buttons)
 
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 50),
+        ])
+    }
+
+    func setUpButtons() -> [UIButton] {
+        var buttons = [UIButton]()
+        for buttonImage in bottomButtonsImages {
+            let button = configurateButton(imageName: buttonImage)
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+
+    func configurateButton(imageName: String) -> UIButton {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
+        let image = UIImage(systemName: imageName, withConfiguration: imageConfig)
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        return button
+    }
+}
+
+// MARK: - UIScrollView
+extension MainViewController: UIScrollViewDelegate {
+    func configurateWorkspace() {
+        workspaceScrollView.minimumZoomScale = 1
+        workspaceScrollView.maximumZoomScale = 3
+        workspaceScrollView.bounces = false
+        workspaceScrollView.delegate = self
+        
+        workspaceScrollView.backgroundColor = .white
+    
+        self.view.addSubview(workspaceScrollView)
+        workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            workspaceScrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            workspaceScrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            workspaceScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            workspaceScrollView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10)
+        ])
+    }
+    
+    fileprivate func showEmptyScrollViewNotice() {
+        let width = self.view.bounds.width
+        let height = self.view.bounds.height
+        
+        textVC = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        let title = setEmptyScrollViewMessage("Create your new Sticker", size: 30, offset: -37)
+        let message = setEmptyScrollViewMessage("By clicking the Camera Button above, you can select an image from the Photo Gallery or Take a Photo", size: 17, offset: +25)
+        textVC.addSubview(title)
+        textVC.addSubview(message)
+        self.view.addSubview(textVC)
+    }
+    
+    fileprivate func setEmptyScrollViewMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
+        let width = self.view.bounds.width - 40
+        let height = self.view.bounds.height
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        messageLabel.text = message
+        messageLabel.textColor = .gray
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "Arial", size: size)
+        messageLabel.sizeToFit()
+        messageLabel.center.x = self.view.center.x
+        messageLabel.center.y = self.view.center.y + offset
+        return messageLabel
+    }
+}
 
 
 // MARK: - Configure NavigationView

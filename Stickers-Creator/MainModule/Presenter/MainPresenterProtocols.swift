@@ -27,11 +27,12 @@ protocol MainPresenterInputProtocol: AnyObject {
     
     func showSelectedPhotos()
     func setImage(image: UIImage?)
+    func getImage() -> UIImage?
+    
+    func reloadWorkspace()
 }
 
 protocol MainViewPresenterOutputProtocol: AnyObject {
-    func setImageView(image: UIImage)
-    
     func showActionSheet()
     
     func checkAccessToCamera()
@@ -42,4 +43,6 @@ protocol MainViewPresenterOutputProtocol: AnyObject {
     
     func openGallery()
     func openCamera()
+    
+    func loadImageToWorkspace(image: UIImage)
 }
