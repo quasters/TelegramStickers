@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-struct MainModel {
-    weak 
+struct MainModel { 
     var photo: UIImage?
 }
 

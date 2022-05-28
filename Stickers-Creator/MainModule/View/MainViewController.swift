@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     var workspaceScrollView = UIScrollView()
     var textVC = UIView()
     var stackView = UIStackView()
+    var workspaceImageView = UIImageView()
     
     fileprivate let bottomButtonsImages = [ "pencil.circle", "scissors.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
 
@@ -73,22 +74,44 @@ extension MainViewController {
 
 // MARK: - UIScrollView
 extension MainViewController: UIScrollViewDelegate {
-    func configurateWorkspace() {
+    func configurateWorkspace(image: UIImage) {
         workspaceScrollView.minimumZoomScale = 1
-        workspaceScrollView.maximumZoomScale = 3
-        workspaceScrollView.bounces = false
+        workspaceScrollView.maximumZoomScale = 5
+        workspaceScrollView.zoomScale = 1
+        workspaceScrollView.flashScrollIndicators()
+        workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
-        
-        workspaceScrollView.backgroundColor = .white
-    
+
+
         self.view.addSubview(workspaceScrollView)
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            workspaceScrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            workspaceScrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            workspaceScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            workspaceScrollView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10)
+            workspaceScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            workspaceScrollView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10),
+            workspaceScrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            workspaceScrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
+        configurateWorkspaceImage(image: image)
+    }
+    
+    func configurateWorkspaceImage(image: UIImage) {
+        workspaceImageView = UIImageView()
+        workspaceImageView.image = image
+        //workspaceImageView.backgroundColor = .blue
+        workspaceImageView.clipsToBounds = false
+        workspaceImageView.contentMode = .scaleAspectFit
+        
+        workspaceScrollView.addSubview(workspaceImageView)
+        
+        workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
+            workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
+        ])
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return workspaceImageView
     }
     
     fileprivate func showEmptyScrollViewNotice() {
