@@ -77,6 +77,8 @@ extension MainViewController: UIScrollViewDelegate {
     func configurateWorkspace(image: UIImage) {
         workspaceScrollView.minimumZoomScale = 1
         workspaceScrollView.maximumZoomScale = 5
+        workspaceScrollView.panGestureRecognizer.minimumNumberOfTouches = 2
+        workspaceScrollView.panGestureRecognizer.maximumNumberOfTouches = 2
         workspaceScrollView.zoomScale = 1
         workspaceScrollView.flashScrollIndicators()
         workspaceScrollView.bounces = true
@@ -97,7 +99,7 @@ extension MainViewController: UIScrollViewDelegate {
     func configurateWorkspaceImage(image: UIImage) {
         workspaceImageView = UIImageView()
         workspaceImageView.image = image
-        //workspaceImageView.backgroundColor = .blue
+        workspaceImageView.backgroundColor = .blue
         workspaceImageView.clipsToBounds = false
         workspaceImageView.contentMode = .scaleAspectFit
         
