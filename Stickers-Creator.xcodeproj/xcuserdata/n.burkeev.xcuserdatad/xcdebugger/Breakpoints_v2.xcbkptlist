@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "8F93EB59-3B9B-40FD-BBD3-58E3EB3FDA2F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stickers-Creator/ErrorModule/Presenter/ErrorPresenter.swift"
@@ -101,7 +101,7 @@
             <Locations>
                <Location
                   uuid = "284C8800-5D79-4C9B-AC39-01FD9F9AF1F6 - 6a5f71db588fba8b"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Stickers_Creator.SelectedPhotosViewController.init(collectionViewLayout: __C.UICollectionViewLayout) -&gt; Stickers_Creator.SelectedPhotosViewController"
@@ -116,7 +116,7 @@
                </Location>
                <Location
                   uuid = "284C8800-5D79-4C9B-AC39-01FD9F9AF1F6 - 8fc3c5ec47851100"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Stickers_Creator.SelectedPhotosViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Stickers_Creator.SelectedPhotosViewController"
@@ -131,7 +131,7 @@
                </Location>
                <Location
                   uuid = "284C8800-5D79-4C9B-AC39-01FD9F9AF1F6 - 4c5a48a4a51234cd"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Stickers_Creator.SelectedPhotosViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Stickers_Creator.SelectedPhotosViewController&gt;"
@@ -397,8 +397,8 @@
             filePath = "Stickers-Creator/MainModule/View/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "setUpBottomButtons()"
             landmarkType = "7">
          </BreakpointContent>
