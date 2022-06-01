@@ -17,7 +17,9 @@ extension MainViewController: UIScrollViewDelegate {
         workspaceScrollView.flashScrollIndicators()
         workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
-
+        
+//        let gestureRecognizer = UIGestureRecognizer()
+//        gestureRecognizer.cancelsTouchesInView = false
 
         self.view.addSubview(workspaceScrollView)
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,11 +33,13 @@ extension MainViewController: UIScrollViewDelegate {
     }
     
     func configurateWorkspaceImage(image: UIImage) {
-        workspaceImageView = UIImageView()
+        workspaceImageView = DrawManager()
+        workspaceImageView.backgroundColor = .red
         workspaceImageView.image = image
-        //workspaceImageView.backgroundColor = .blue
         workspaceImageView.clipsToBounds = false
-        workspaceImageView.contentMode = .scaleAspectFit
+        workspaceImageView.contentMode = .center
+        workspaceImageView.isUserInteractionEnabled = true
+        
         
         workspaceScrollView.addSubview(workspaceImageView)
         
@@ -45,6 +49,7 @@ extension MainViewController: UIScrollViewDelegate {
             workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
         ])
     }
+    
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return workspaceImageView

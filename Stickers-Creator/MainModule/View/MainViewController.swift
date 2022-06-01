@@ -15,9 +15,16 @@ class MainViewController: UIViewController {
     
     var workspaceScrollView = UIScrollView()
     var textVC = UIView()
-    var stackView = UIStackView()
+    var bottomButtonsStackView = UIStackView()
     var brushSizeSlider = UISlider()
     var workspaceImageView = UIImageView()
+    
+    var linesCount: UInt = 0 {
+        didSet {
+            self.currentLine = linesCount
+        }
+    }
+    var currentLine: UInt = 0
     
     fileprivate let bottomButtonsImages = [ "pencil.circle", "scissors.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
     
@@ -37,18 +44,18 @@ class MainViewController: UIViewController {
 extension MainViewController {
     func setUpBottomButtons() {
         let buttons = setUpButtons()
-        stackView = UIStackView(arrangedSubviews: buttons)
+        bottomButtonsStackView = UIStackView(arrangedSubviews: buttons)
 
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        view.addSubview(stackView)
+        bottomButtonsStackView.axis = .horizontal
+        bottomButtonsStackView.distribution = .equalSpacing
+        view.addSubview(bottomButtonsStackView)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 50),
+            bottomButtonsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            bottomButtonsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            bottomButtonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomButtonsStackView.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         setupSlider()
@@ -85,7 +92,7 @@ extension MainViewController {
             brushSizeSlider.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
             brushSizeSlider.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
             brushSizeSlider.heightAnchor.constraint(equalToConstant: 30),
-            brushSizeSlider.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -15)
+            brushSizeSlider.bottomAnchor.constraint(equalTo: bottomButtonsStackView.topAnchor, constant: -15)
         ])
     }
     
@@ -116,9 +123,9 @@ extension MainViewController {
     func createRightButtons() {
         var buttons = [UIBarButtonItem]()
         buttons.append(createButton(image: "camera", isEnabled: true, action: #selector(requestActionSheet)))
-        buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: false, action: nil))
-        buttons.append(createButton(image: "arrow.uturn.backward.circle", isEnabled: false, action: nil))
-        buttons.append(createButton(image: "xmark.circle", isEnabled: false, action: nil))
+        buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: (currentLine < linesCount), action: #selector(nextLine)))
+        buttons.append(createButton(image: "arrow.uturn.backward.circle", isEnabled: (currentLine != 0), action: #selector(previousLine)))
+        buttons.append(createButton(image: "xmark.circle", isEnabled: (currentLine != 0), action: #selector(deleteLines)))
         
         self.navigationItem.rightBarButtonItems = buttons
     }
@@ -132,6 +139,21 @@ extension MainViewController {
     
     @objc func requestActionSheet() {
         self.presenter?.tapOnCameraButton()
+    }
+    
+    @objc func previousLine() {
+        currentLine -= 1
+        createRightButtons()
+    }
+    
+    @objc func nextLine() {
+        currentLine += 1
+        createRightButtons()
+    }
+    
+    @objc func deleteLines() {
+        currentLine = 0
+        createRightButtons()
     }
     
     func showCameraActionSheet() {
