@@ -317,8 +317,8 @@
             filePath = "Stickers-Creator/SelectedPhotosModule/View/SelectedPhotosCollectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "SelectedPhotosCollectionViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -429,8 +429,8 @@
             filePath = "Stickers-Creator/MainModule/View/UIScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "configurateWorkspaceImage(image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -445,8 +445,8 @@
             filePath = "Stickers-Creator/MainModule/View/UIScrollView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "viewForZooming(in:)"
             landmarkType = "7">
          </BreakpointContent>

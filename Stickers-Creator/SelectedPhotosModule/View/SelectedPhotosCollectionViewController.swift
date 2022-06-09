@@ -83,9 +83,13 @@ extension SelectedPhotosCollectionViewController {
         let asset = self.fetchResult[indexPath.row]
         let manager = PHImageManager.default()
         var image = UIImage()
+        
+        let sizeFactor = UIScreen.main.scale
+        let deviceSize = UIScreen.main.nativeBounds.size
         let _ = manager.requestImage(for: asset,
-                                         targetSize: CGSize(width: 400, height: 400),
-                                         contentMode: .aspectFit, options: nil) { img, _ in
+                                     targetSize: CGSize(width: deviceSize.width * sizeFactor, height: deviceSize.height * sizeFactor),
+                                     contentMode: .aspectFit,
+                                     options: nil) { img, _ in
             guard let img = img else { return }
             image = img
             self.choseImage(image: image)
