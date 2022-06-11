@@ -10,40 +10,65 @@ import UIKit
 
 class DrawView: UIImageView {
     let linesManager = LinesManager()
-    var lineWidth: CGFloat!
-    var lineColor: UIColor!
-    var startPoint: CGPoint!
+    var lineWidth = CGFloat(10)
+    var lineColor = CGColor(red: 0, green: 0, blue: 100, alpha: 0.3)
+    var lastPoint: CGPoint!
     var endPoint: CGPoint!
-    var path: UIBezierPath!
     
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//    }
+
+    
+    var currentLayer: CAShapeLayer!
+    var bezierPaths = [UIBezierPath]()
+    var currentPath: UIBezierPath!
+    
+    
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        context.strokePath()
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        startPoint = touch?.location(in: self)
+        guard let touch = touches.first else { return }
+        lastPoint = touch.location(in: self)
+
+        currentLayer = CAShapeLayer()
+        currentPath = UIBezierPath()
+
+        self.layer.addSublayer(currentLayer)
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        endPoint = touch?.location(in: self)
-        linesManager.addLine(line: LineModel(start: startPoint, end: endPoint, size: 10))
-        
-        path = UIBezierPath()
-        path.move(to: startPoint)
-        path.addLine(to: endPoint)
-        startPoint = endPoint
-        drawShapeLayer()
+        guard let touch = touches.first else { return }
+        let currentPoint = touch.location(in: self)
+        //drawLine(from: lastPoint, to: currentPoint)
+        lastPoint = currentPoint
     }
-    
-    private func drawShapeLayer() {
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = CGColor(red: 0, green: 0, blue: 100, alpha: 0.3) // FIXME: - change color
-        shapeLayer.lineWidth = CGFloat(10)
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        self.layer.addSublayer(shapeLayer)
-        self.setNeedsDisplay()
-    }
+//
+//
+//
+//    func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
+//        currentPath.move(to: fromPoint)
+//        for bezierPath in bezierPaths {
+//            if bezierPath.contains(toPoint) { return }
+//        }
+//
+//        currentPath.addLine(to: toPoint)
+//        currentLayer.path = currentPath.cgPath
+//        currentLayer.strokeColor = lineColor
+//        currentLayer.lineWidth = lineWidth
+//        currentLayer.lineCap = .round
+//        currentLayer.lineJoin = .round
+//        print("a - \(currentPath.isEmpty)")
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesEnded(touches, with: event)
+//        bezierPaths.append(currentPath)
+//    }
 }
+
+

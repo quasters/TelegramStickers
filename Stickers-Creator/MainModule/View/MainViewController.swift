@@ -82,7 +82,7 @@ extension MainViewController {
     func setupSlider() {
         brushSizeSlider.minimumValue = 1.0
         brushSizeSlider.maximumValue = 30.0
-        brushSizeSlider.value = 15.0
+        brushSizeSlider.value = 15.5
         //brushSizeSlider.backgroundColor = .red
         brushSizeSlider.addTarget(self, action: #selector(changeBrushSize), for: .valueChanged)
         
