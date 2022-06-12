@@ -26,26 +26,58 @@ extension MainViewController: UIScrollViewDelegate {
             workspaceScrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             workspaceScrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
-        configurateWorkspaceImage(image: image)
-    }
-    
-    func configurateWorkspaceImage(image: UIImage) {
-        workspaceImageView = DrawView()
-        //workspaceImageView.backgroundColor = .red
-        workspaceImageView.image = image
-        workspaceImageView.clipsToBounds = false
-        workspaceImageView.contentMode = .scaleAspectFit
-        workspaceImageView.isUserInteractionEnabled = true
         
         
+        
+        workspaceImageView = MaskImage(frame: self.workspaceScrollView.frame, image: image)
+        guard let workspaceImageView = workspaceImageView else { return }
         workspaceScrollView.addSubview(workspaceImageView)
+        
+        
         
         workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
             workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
         ])
+       // configurateWorkspaceImage(image: image)
     }
+    
+//    func configurateWorkspaceImage(image: UIImage) {
+////        let render = UIGraphicsImageRenderer(bounds: self.view.frame)
+//        //workspaceImageView = DrawView()
+//        //maskImage = DrawView()
+//        maskImage.isUserInteractionEnabled = true
+//        maskImage.clipsToBounds = false
+//        //maskImage.backgroundColor = .red
+//        
+//        workspaceImageView.image = image
+//        workspaceImageView.clipsToBounds = false
+//        workspaceImageView.contentMode = .scaleAspectFit
+//        //workspaceImageView.isUserInteractionEnabled = true
+////        workspaceImageView = DrawView()
+////        let image = render.image(actions: { (context) in
+////            context.ima
+////        })
+////        workspaceImageView.backgroundColor = .red
+//       
+//        
+//        
+//        workspaceScrollView.addSubview(workspaceImageView)
+//        workspaceScrollView.addSubview(maskImage)
+//        
+//        workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
+//            workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
+//        ])
+//        
+//        maskImage.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            maskImage.widthAnchor.constraint(equalTo: workspaceImageView.widthAnchor),
+//            maskImage.heightAnchor.constraint(equalTo: workspaceImageView.heightAnchor)
+//        ])
+//    }
     
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

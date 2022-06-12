@@ -64,7 +64,7 @@ extension MainViewController: MainViewPresenterOutputProtocol {
     func loadImageToWorkspace(image: UIImage) {
         self.textVC.removeFromSuperview()
         self.workspaceScrollView.removeFromSuperview()
-        self.workspaceImageView.removeFromSuperview()
+        self.workspaceImageView?.removeFromSuperview()
         
         self.configurateWorkspace(image: image)
     }
