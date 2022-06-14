@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     var textVC = UIView()
     var bottomButtonsStackView = UIStackView()
     var brushSizeSlider = UISlider()
-    var workspaceImageView: MaskImage?//UIImageView()
+    var workspaceImageView: MaskImageBinder?//UIImageView()
     
     var linesCount: UInt = 0 {
         didSet {

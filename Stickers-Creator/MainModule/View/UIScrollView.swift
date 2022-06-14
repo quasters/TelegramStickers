@@ -17,6 +17,8 @@ extension MainViewController: UIScrollViewDelegate {
         workspaceScrollView.flashScrollIndicators()
         workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
+        
+        //workspaceScrollView.backgroundColor = .red
 
         self.view.addSubview(workspaceScrollView)
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +31,7 @@ extension MainViewController: UIScrollViewDelegate {
         
         
         
-        workspaceImageView = MaskImage(frame: self.workspaceScrollView.frame, image: image)
+        workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image)
         guard let workspaceImageView = workspaceImageView else { return }
         workspaceScrollView.addSubview(workspaceImageView)
         

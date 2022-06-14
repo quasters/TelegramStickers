@@ -8,9 +8,10 @@
 import Foundation
 import UIKit
 
-class MaskImage: UIView {
-    private var maskImage: DrawView?
+class MaskImageBinder: UIView {
+    private var maskImage = DrawView()
     private var workspaceImageView = UIImageView()
+    private var path: CGPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,8 +21,8 @@ class MaskImage: UIView {
         self.init(frame: frame)
         workspaceImageView.image = image
         maskImage = getMaskImage(image: image)
-        guard let maskImage = maskImage else { return }
-
+        
+        maskImage.delegate = self
         maskImage.isUserInteractionEnabled = true
         
         workspaceImageView.clipsToBounds = false
@@ -44,7 +45,6 @@ class MaskImage: UIView {
             workspaceImageView.heightAnchor.constraint(equalTo: self.heightAnchor)
         ])
         
-        guard let maskImage = maskImage else { return }
         maskImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             maskImage.widthAnchor.constraint(equalTo: workspaceImageView.widthAnchor),
@@ -58,5 +58,24 @@ class MaskImage: UIView {
         let imageFrame = CGRect(x: 0, y: 0, width: width, height: height)
         
         return DrawView(frame: imageFrame)
+    }
+}
+
+extension MaskImageBinder: DrawViewDelegate {
+    func setMask(_ mask: UIImage?) {
+        self.cropImage(mask)
+    }
+}
+
+extension MaskImageBinder {
+    func cropImage(_ mask: UIImage?) {
+        guard let mask = mask else { return }
+        
+        let maskLayer = CALayer()
+        maskLayer.contents = mask.cgImage
+        maskLayer.frame.origin = CGPoint(x: 0, y: 0)
+        maskLayer.frame = self.bounds
+        
+        workspaceImageView.layer.mask = maskLayer
     }
 }
