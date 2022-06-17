@@ -18,8 +18,6 @@ extension MainViewController: UIScrollViewDelegate {
         workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
         
-        //workspaceScrollView.backgroundColor = .red
-
         self.view.addSubview(workspaceScrollView)
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -29,58 +27,17 @@ extension MainViewController: UIScrollViewDelegate {
             workspaceScrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
         
-        
-        
+        // MARK: - Add CanvasLayer
         workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image)
         guard let workspaceImageView = workspaceImageView else { return }
         workspaceScrollView.addSubview(workspaceImageView)
-        
-        
         
         workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
             workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
         ])
-       // configurateWorkspaceImage(image: image)
     }
-    
-//    func configurateWorkspaceImage(image: UIImage) {
-////        let render = UIGraphicsImageRenderer(bounds: self.view.frame)
-//        //workspaceImageView = DrawView()
-//        //maskImage = DrawView()
-//        maskImage.isUserInteractionEnabled = true
-//        maskImage.clipsToBounds = false
-//        //maskImage.backgroundColor = .red
-//        
-//        workspaceImageView.image = image
-//        workspaceImageView.clipsToBounds = false
-//        workspaceImageView.contentMode = .scaleAspectFit
-//        //workspaceImageView.isUserInteractionEnabled = true
-////        workspaceImageView = DrawView()
-////        let image = render.image(actions: { (context) in
-////            context.ima
-////        })
-////        workspaceImageView.backgroundColor = .red
-//       
-//        
-//        
-//        workspaceScrollView.addSubview(workspaceImageView)
-//        workspaceScrollView.addSubview(maskImage)
-//        
-//        workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
-//            workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
-//        ])
-//        
-//        maskImage.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            maskImage.widthAnchor.constraint(equalTo: workspaceImageView.widthAnchor),
-//            maskImage.heightAnchor.constraint(equalTo: workspaceImageView.heightAnchor)
-//        ])
-//    }
-    
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return workspaceImageView
@@ -92,13 +49,13 @@ extension MainViewController: UIScrollViewDelegate {
         
         textVC = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         let title = setEmptyScrollViewMessage("Create your new Sticker", size: 30, offset: -37)
-        let message = setEmptyScrollViewMessage("By clicking the Camera Button above, you can select an image from the Photo Gallery or Take a Photo", size: 17, offset: +25)
+        let message = setEmptyScrollViewMessage("By clicking the Camera Button above, you can select an image from the Photo Gallery or Take a Photo", size: 17, offset: 25)
         textVC.addSubview(title)
         textVC.addSubview(message)
         self.view.addSubview(textVC)
     }
     
-    fileprivate func setEmptyScrollViewMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
+    private func setEmptyScrollViewMessage(_ message: String, size: CGFloat, offset: CGFloat) -> UILabel {
         let width = self.view.bounds.width - 40
         let height = self.view.bounds.height
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))

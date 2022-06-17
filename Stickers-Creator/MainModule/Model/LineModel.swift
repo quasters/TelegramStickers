@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 struct LineModel {
-    var start: CGPoint
-    var end: CGPoint
-    var size: Float
+    var path: CGPath
+    var width: CGFloat
+    var isErase: Bool
     
-    init(start: CGPoint, end: CGPoint, size: Float) {
-        self.start = start
-        self.end = end
-        self.size = size
+    init(path: CGPath, width: CGFloat, isErase: Bool) {
+        self.path = path
+        self.width = width
+        self.isErase = isErase
     }
 }

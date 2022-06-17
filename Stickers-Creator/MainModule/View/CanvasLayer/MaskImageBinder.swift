@@ -23,12 +23,13 @@ class MaskImageBinder: UIView {
         maskImage = getMaskImage(image: image)
         
         maskImage.delegate = self
+        LinesManager.shared.setImageView(imageView: maskImage)
+        
         maskImage.isUserInteractionEnabled = true
         
         workspaceImageView.clipsToBounds = false
         workspaceImageView.contentMode = .scaleAspectFit
-        
-        
+
         self.addSubview(workspaceImageView)
         self.addSubview(maskImage)
         addConstrains()
@@ -39,6 +40,7 @@ class MaskImageBinder: UIView {
     }
     
     private func addConstrains() {
+        
         workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             workspaceImageView.widthAnchor.constraint(equalTo: self.widthAnchor),
@@ -50,6 +52,7 @@ class MaskImageBinder: UIView {
             maskImage.widthAnchor.constraint(equalTo: workspaceImageView.widthAnchor),
             maskImage.heightAnchor.constraint(equalTo: workspaceImageView.heightAnchor)
         ])
+        
     }
     
     private func getMaskImage(image: UIImage) -> DrawView {
@@ -70,12 +73,12 @@ extension MaskImageBinder: DrawViewDelegate {
 extension MaskImageBinder {
     func cropImage(_ mask: UIImage?) {
         guard let mask = mask else { return }
-        
+
         let maskLayer = CALayer()
         maskLayer.contents = mask.cgImage
         maskLayer.frame.origin = CGPoint(x: 0, y: 0)
         maskLayer.frame = self.bounds
-        
+
         workspaceImageView.layer.mask = maskLayer
     }
 }

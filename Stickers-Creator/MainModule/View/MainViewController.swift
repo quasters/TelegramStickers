@@ -19,17 +19,23 @@ class MainViewController: UIViewController {
     var brushSizeSlider = UISlider()
     var workspaceImageView: MaskImageBinder?//UIImageView()
     
-    var linesCount: UInt = 0 {
-        didSet {
-            self.currentLine = linesCount
-        }
-    }
-    var currentLine: UInt = 0
+//    var linesCount: UInt = 4 {
+//        didSet {
+//            self.currentLine = linesCount
+//        }
+//    }
+//    var currentLine: UInt = 4
     
-    fileprivate let bottomButtonsImages = [ "pencil.circle", "scissors.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
+    fileprivate let bottomButtonsImages = [ "scissors.circle", "pencil.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
         
         configureNavigationView()
         setUpBottomButtons()
@@ -83,7 +89,7 @@ extension MainViewController {
         brushSizeSlider.minimumValue = 1.0
         brushSizeSlider.maximumValue = 30.0
         brushSizeSlider.value = 15.5
-        //brushSizeSlider.backgroundColor = .red
+        
         brushSizeSlider.addTarget(self, action: #selector(changeBrushSize), for: .valueChanged)
         
         self.view.addSubview(brushSizeSlider)
@@ -102,11 +108,15 @@ extension MainViewController {
 }
 
 // MARK: - Configure NavigationView
-extension MainViewController {
+extension MainViewController: LinesManagerButtonSettingsDelegate {
+    func reloadActivityStatus(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool) {
+        createRightButtons(clearStatus: clearStatus, backStatus: backStatus, forwardStatus: forwardStatus)
+    }
     
     func configureNavigationView() {
         createInfoButton()
-        createRightButtons()
+        createRightButtons(clearStatus: false, backStatus: false, forwardStatus: false)
+        LinesManager.shared.buttonSettingsDelegate = self
     }
     
     func createInfoButton() {
@@ -120,12 +130,12 @@ extension MainViewController {
         presenter?.tapOnInfoButton()
     }
     
-    func createRightButtons() {
+    func createRightButtons(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool) {
         var buttons = [UIBarButtonItem]()
         buttons.append(createButton(image: "camera", isEnabled: true, action: #selector(requestActionSheet)))
-        buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: (currentLine < linesCount), action: #selector(nextLine)))
-        buttons.append(createButton(image: "arrow.uturn.backward.circle", isEnabled: (currentLine != 0), action: #selector(previousLine)))
-        buttons.append(createButton(image: "xmark.circle", isEnabled: (currentLine != 0), action: #selector(deleteLines)))
+        buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: forwardStatus, action: #selector(nextLine)))
+        buttons.append(createButton(image: "arrow.uturn.backward.circle", isEnabled: backStatus, action: #selector(previousLine)))
+        buttons.append(createButton(image: "xmark.circle", isEnabled: clearStatus, action: #selector(deleteLines)))
         
         self.navigationItem.rightBarButtonItems = buttons
     }
@@ -142,18 +152,21 @@ extension MainViewController {
     }
     
     @objc func previousLine() {
-        currentLine -= 1
-        createRightButtons()
+        LinesManager.shared.previusLine()
+        //currentLine -= 1
+//        createRightButtons()
     }
     
     @objc func nextLine() {
-        currentLine += 1
-        createRightButtons()
+        LinesManager.shared.nextLine()
+//        currentLine += 1
+//        createRightButtons()
     }
     
     @objc func deleteLines() {
-        currentLine = 0
-        createRightButtons()
+        LinesManager.shared.clearCanvas()
+//        currentLine = 0
+//        createRightButtons()
     }
     
     func showCameraActionSheet() {
@@ -170,66 +183,5 @@ extension MainViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
-    }
-}
-
-// MARK: - Photo LIbrary
-extension MainViewController: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
-                if let image = object as? UIImage {
-                    DispatchQueue.main.async {
-                        self.presenter?.setImage(image: image)
-                    }
-                }
-            }
-        }
-    }
-    
-    func requestLibraryPermission() {
-        presenter?.getPhotoLibraryAccessPermission(complition: { status in
-            if #available(iOS 14, *) {
-                switch status {
-                case .notDetermined, .denied:
-                    self.presenter?.callWarningAlert(message: "Please allow access to your Photo Gallery", goTo: true)
-                case .restricted:
-                    self.presenter?.callWarningAlert(message: "The application can't help you create stickers without access to your Photo Gallery :(", goTo: false)
-                case .authorized:
-                    self.presenter?.callGallery()
-                case .limited:
-                    self.presenter?.showSelectedPhotos()
-                default:
-                    fatalError("Unknown PHAuthorizationStatus")
-                }
-            } else {
-                //FIXME: - Add realization for iOS 13 and earlier
-                self.presenter?.callWarningAlert(message: "Please update your phone to iOS 14 or newer", goTo: false)
-            }
-        })
-    }
-}
-
-// MARK: - Camera
-extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        presenter?.setImage(image: image)
-        self.dismiss(animated: true)
-    }
-    
-    func requestCameraPermission() {
-        presenter?.getCameraAccessPermission(complition: { response in
-            if response {
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    self.presenter?.callCamera()
-                } else {
-                    self.presenter?.callWarningAlert(message: "Your camera doesn't work", goTo: false)
-                }
-            } else {
-                self.presenter?.callWarningAlert(message: "Please allow access to your camera", goTo: true)
-            }
-        })
     }
 }

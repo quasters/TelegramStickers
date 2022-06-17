@@ -40,8 +40,8 @@ class Router: RouterProtocol {
         if let navigationController = navigationController {
             guard let selectedPhotosVC = assemblyBuilder?.createSelectedPhotosModule(router: self) else { return }
             selectedPhotosVC.modalPresentationStyle = .fullScreen
-            let last = navigationController.viewControllers.first
-            last?.present(selectedPhotosVC, animated: true)
+            let first = navigationController.viewControllers.first
+            first?.present(selectedPhotosVC, animated: true)
         }
     }
     
