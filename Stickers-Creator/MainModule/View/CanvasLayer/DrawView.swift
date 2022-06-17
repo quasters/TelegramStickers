@@ -9,26 +9,22 @@ import Foundation
 import UIKit
 
 
-protocol DrawViewDelegate: AnyObject {
-    func setMask(_ mask: UIImage?)
-}
+//protocol DrawViewDelegate: AnyObject {
+//    func setMask(_ mask: UIImage?)
+//}
 
 class DrawView: UIImageView {
-    public weak var delegate: DrawViewDelegate?
+//    public weak var delegate: DrawViewDelegate?
 
     private var lineWidth: CGFloat = CGFloat(30)
     private var isEraseLine = false
-    private var lineColor: CGColor = UIColor.white.cgColor
+    
     private var lastPoint: CGPoint!
-    private var endPoint: CGPoint!
 
-    private var maskLayer = CAShapeLayer()
     private var currentPath: UIBezierPath!
     private var lines = [LineModel]()
     
-    //private var paths = CGMutablePath()
-
-    var a = 0
+    var a = 0 // FIXME: - remove test variable
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -52,8 +48,6 @@ class DrawView: UIImageView {
         let line = LineModel(path: currentPath.cgPath, width: lineWidth, isErase: isEraseLine)
         lines.append(line)
         LinesManager.shared.addLine(line: line)
-        //self.paths.addPath(self.currentPath.cgPath)
-        //paths.append(currentPath.cgPath)
         
 //        let imageMask = self.getImageMask(line: line)
 //        self.delegate?.setMask(imageMask)
@@ -71,37 +65,23 @@ class DrawView: UIImageView {
 
         context.move(to: fromPoint)
         context.addLine(to: toPoint)
-        
-       if a > 4 {
+              
+        if a > 6 {
             isEraseLine = true
         }
-//            //lineColor = UIColor.clear.cgColor
-//            context.setBlendMode(.clear)
-//        } else {
-//            context.setBlendMode(.color)
-//        }
-//
-      
+        
         context.setBlendMode( !isEraseLine ? .color : .clear)
         context.setLineCap(CGLineCap.round)
         context.setLineJoin(CGLineJoin.round)
         context.setLineWidth(lineWidth)
-        context.setStrokeColor(lineColor)
+        context.setStrokeColor(UIColor.white.cgColor)
 
         context.strokePath()
 
         self.image = UIGraphicsGetImageFromCurrentImageContext()
         self.alpha = 0.5
-        
     }
-    
-    private func getImageMask(line: LineModel) -> UIImage? {
-        //let size = CGSize(width: self.bounds.width, height: self.bounds.height)
 
-        let imageMask = ImageMaskCreator.shared.create(frame: self.bounds, lines: lines, currentLine: lines.endIndex)
-
-        return imageMask
-    }
 }
 
 

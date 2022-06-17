@@ -12,11 +12,17 @@ protocol LinesManagerButtonSettingsDelegate: AnyObject {
     func reloadActivityStatus(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool)
 }
 
+protocol DrawViewDelegate: AnyObject {
+    func setMask(_ mask: UIImage?)
+}
+
 class LinesManager {
     static var shared = LinesManager()
     private init(){}
     
     public var buttonSettingsDelegate: LinesManagerButtonSettingsDelegate?
+    public var delegate: DrawViewDelegate?
+    
     private var savedLines = [LineModel]()
     private var imageView: UIImageView?
 
@@ -38,8 +44,8 @@ class LinesManager {
         savedLines.removeSubrange(currentLine ..< savedLines.endIndex)
         savedLines.append(line)
         linesCount += 1
-        sendButtonsStatus()
-        //reloadView()
+        //sendButtonsStatus()
+        reloadView()
     }
 
     func clearCanvas() {
@@ -84,6 +90,10 @@ class LinesManager {
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         imageView.alpha = 0.5
         UIGraphicsEndImageContext()
+        
+        // FIXME: - remove
+        let imageMask = self.getImageMask(lines: savedLines)
+        self.delegate?.setMask(imageMask)
     }
     
     private func sendButtonsStatus() {
@@ -91,6 +101,12 @@ class LinesManager {
         let backStatus = currentLine != 0
         let forwardStatus = currentLine < linesCount
         buttonSettingsDelegate?.reloadActivityStatus(clearStatus: clearStatus, backStatus: backStatus, forwardStatus: forwardStatus)
+    }
+    
+    func getImageMask(lines: [LineModel]) -> UIImage? {
+        guard let bounds = self.imageView?.bounds else { return nil }
+        let imageMask = ImageMaskCreator.shared.create(frame: bounds, lines: lines, currentLine: currentLine)
+        return imageMask
     }
 }
 

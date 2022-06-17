@@ -22,7 +22,8 @@ class MaskImageBinder: UIView {
         workspaceImageView.image = image
         maskImage = getMaskImage(image: image)
         
-        maskImage.delegate = self
+        //maskImage.delegate = self
+        LinesManager.shared.delegate = self
         LinesManager.shared.setImageView(imageView: maskImage)
         
         maskImage.isUserInteractionEnabled = true
