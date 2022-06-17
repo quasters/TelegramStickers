@@ -9,30 +9,31 @@ import Foundation
 import UIKit
 
 class MaskImageBinder: UIView {
-    private var maskImage = DrawView()
-    private var workspaceImageView = UIImageView()
+    private var drawView = DrawView() // The canvas
+    private var imageView = UIImageView() // UIImageView with selected image
     private var path: CGPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(frame: CGRect, image: UIImage) {
+    convenience init(frame: CGRect, image: UIImage, setterSettingsReceiverDelegate: inout DrawToolsSettingsDelegate?) {
         self.init(frame: frame)
-        workspaceImageView.image = image
-        maskImage = getMaskImage(image: image)
+        imageView.image = image
         
-        //maskImage.delegate = self
-        LinesManager.shared.delegate = self
-        LinesManager.shared.setImageView(imageView: maskImage)
+        drawView = getMaskImage(image: image)
+        setterSettingsReceiverDelegate = drawView
         
-        maskImage.isUserInteractionEnabled = true
+        //LinesManager.shared.delegate = self
+        LinesManager.shared.setImageView(imageView: drawView)
         
-        workspaceImageView.clipsToBounds = false
-        workspaceImageView.contentMode = .scaleAspectFit
+        drawView.isUserInteractionEnabled = true
+        
+        imageView.clipsToBounds = false
+        imageView.contentMode = .scaleAspectFit
 
-        self.addSubview(workspaceImageView)
-        self.addSubview(maskImage)
+        self.addSubview(imageView)
+        self.addSubview(drawView)
         addConstrains()
     }
     
@@ -40,39 +41,43 @@ class MaskImageBinder: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func getSettingsReceiver() -> DrawToolsSettingsDelegate {
+        return drawView
+    }
+    
     private func addConstrains() {
         
-        workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            workspaceImageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            workspaceImageView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            imageView.heightAnchor.constraint(equalTo: self.heightAnchor)
         ])
         
-        maskImage.translatesAutoresizingMaskIntoConstraints = false
+        drawView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            maskImage.widthAnchor.constraint(equalTo: workspaceImageView.widthAnchor),
-            maskImage.heightAnchor.constraint(equalTo: workspaceImageView.heightAnchor)
+            drawView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+            drawView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
         
     }
     
     private func getMaskImage(image: UIImage) -> DrawView {
-        let height = image.size.height * workspaceImageView.image!.scale
-        let width = image.size.width * workspaceImageView.image!.scale
+        let height = image.size.height * imageView.image!.scale
+        let width = image.size.width * imageView.image!.scale
         let imageFrame = CGRect(x: 0, y: 0, width: width, height: height)
         
         return DrawView(frame: imageFrame)
     }
 }
 
-extension MaskImageBinder: DrawViewDelegate {
-    func setMask(_ mask: UIImage?) {
-        self.cropImage(mask)
-    }
-}
+//extension MaskImageBinder: DrawViewDelegate {
+//    func setMask(_ mask: UIImage?) {
+//        self.cropImage(mask)
+//    }
+//}
 
 extension MaskImageBinder {
-    func cropImage(_ mask: UIImage?) {
+    private func cropImage(_ mask: UIImage?) {
         guard let mask = mask else { return }
 
         let maskLayer = CALayer()
@@ -80,6 +85,6 @@ extension MaskImageBinder {
         maskLayer.frame.origin = CGPoint(x: 0, y: 0)
         maskLayer.frame = self.bounds
 
-        workspaceImageView.layer.mask = maskLayer
+        imageView.layer.mask = maskLayer
     }
 }

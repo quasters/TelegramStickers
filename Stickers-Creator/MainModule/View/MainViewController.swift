@@ -9,23 +9,22 @@ import UIKit
 import Foundation
 import PhotosUI
 
-class MainViewController: UIViewController {
+protocol DrawToolsSettingsDelegate {
+    func setLineWidth(_ width: CGFloat)
+    func setTool(_ isErase: Bool)
+}
 
+class MainViewController: UIViewController {
     var presenter: MainPresenterInputProtocol?
+    
+    var drawToolsSettingsDelegate: DrawToolsSettingsDelegate?
     
     var workspaceScrollView = UIScrollView()
     var textVC = UIView()
     var bottomButtonsStackView = UIStackView()
     var brushSizeSlider = UISlider()
     var workspaceImageView: MaskImageBinder?//UIImageView()
-    
-//    var linesCount: UInt = 4 {
-//        didSet {
-//            self.currentLine = linesCount
-//        }
-//    }
-//    var currentLine: UInt = 4
-    
+        
     fileprivate let bottomButtonsImages = [ "scissors.circle", "pencil.circle", "circle.bottomhalf.filled",  "eye.circle", "folder.circle"]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -40,7 +39,6 @@ class MainViewController: UIViewController {
         configureNavigationView()
         setUpBottomButtons()
         showEmptyScrollViewNotice()
-        //configurateWorkspace()
     }
 
 
@@ -77,6 +75,8 @@ extension MainViewController {
         return buttons
     }
 
+    
+    // FIXME: - add targets
     func configurateButton(imageName: String) -> UIButton {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
         let image = UIImage(systemName: imageName, withConfiguration: imageConfig)
@@ -86,10 +86,10 @@ extension MainViewController {
     }
     
     func setupSlider() {
-        brushSizeSlider.minimumValue = 1.0
-        brushSizeSlider.maximumValue = 30.0
-        brushSizeSlider.value = 15.5
-        
+        brushSizeSlider.minimumValue = 5.0
+        brushSizeSlider.maximumValue = 75.0
+        brushSizeSlider.value = 39.6
+
         brushSizeSlider.addTarget(self, action: #selector(changeBrushSize), for: .valueChanged)
         
         self.view.addSubview(brushSizeSlider)
@@ -103,7 +103,7 @@ extension MainViewController {
     }
     
     @objc func changeBrushSize() {
-        
+        drawToolsSettingsDelegate?.setLineWidth(CGFloat(brushSizeSlider.value))
     }
 }
 
@@ -153,20 +153,14 @@ extension MainViewController: LinesManagerButtonSettingsDelegate {
     
     @objc func previousLine() {
         LinesManager.shared.previusLine()
-        //currentLine -= 1
-//        createRightButtons()
     }
     
     @objc func nextLine() {
         LinesManager.shared.nextLine()
-//        currentLine += 1
-//        createRightButtons()
     }
     
     @objc func deleteLines() {
         LinesManager.shared.clearCanvas()
-//        currentLine = 0
-//        createRightButtons()
     }
     
     func showCameraActionSheet() {

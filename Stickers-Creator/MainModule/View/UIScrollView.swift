@@ -28,7 +28,8 @@ extension MainViewController: UIScrollViewDelegate {
         ])
         
         // MARK: - Add CanvasLayer
-        workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image)
+        workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image, setterSettingsReceiverDelegate: &drawToolsSettingsDelegate)
+        
         guard let workspaceImageView = workspaceImageView else { return }
         workspaceScrollView.addSubview(workspaceImageView)
         
@@ -37,6 +38,10 @@ extension MainViewController: UIScrollViewDelegate {
             workspaceImageView.widthAnchor.constraint(equalTo: workspaceScrollView.widthAnchor),
             workspaceImageView.heightAnchor.constraint(equalTo: workspaceScrollView.heightAnchor)
         ])
+        
+        // MARK: - Configure canvas DrawView
+        drawToolsSettingsDelegate?.setLineWidth(CGFloat(brushSizeSlider.value))
+        drawToolsSettingsDelegate?.setTool(false)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -49,7 +54,7 @@ extension MainViewController: UIScrollViewDelegate {
         
         textVC = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         let title = setEmptyScrollViewMessage("Create your new Sticker", size: 30, offset: -37)
-        let message = setEmptyScrollViewMessage("By clicking the Camera Button above, you can select an image from the Photo Gallery or Take a Photo", size: 17, offset: 25)
+        let message = setEmptyScrollViewMessage("By clicking the Camera Button above, you can select an image from the Photo Gallery or Take a Photo", size: 17, offset: +25)
         textVC.addSubview(title)
         textVC.addSubview(message)
         self.view.addSubview(textVC)

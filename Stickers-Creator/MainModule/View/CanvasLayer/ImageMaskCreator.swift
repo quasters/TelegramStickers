@@ -14,8 +14,8 @@ class ImageMaskCreator {
     
     func create(frame: CGRect, lines: [LineModel], currentLine: Int) -> UIImage? {
         let size = CGSize(width: frame.width, height: frame.height)
-        UIGraphicsBeginImageContext(size)
         
+        UIGraphicsBeginImageContext(size)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         context.clear(frame)
         
@@ -31,22 +31,6 @@ class ImageMaskCreator {
         
         guard let maskCGImage = context.makeImage() else { return nil }
         let maskImage = UIImage(cgImage: maskCGImage)
-        
-//        let path = linesToPath(lines: lines)
-//
-//        UIGraphicsBeginImageContext(size)
-//        let maskLayer = CAShapeLayer()
-//        maskLayer.path = path
-//        maskLayer.fillRule = .evenOdd
-//        maskLayer.strokeColor = UIColor.white.cgColor
-//        maskLayer.lineWidth = line.width
-//        maskLayer.lineCap = .round
-//        maskLayer.lineJoin = .round
-//
-//        let renderer = UIGraphicsImageRenderer(size: size)
-//        let maskImage = renderer.image { context in
-//            //return maskLayer.render(in: context.cgContext)
-//        }
         UIGraphicsEndImageContext()
         
         let reversedImage = invertMask(maskImage)
