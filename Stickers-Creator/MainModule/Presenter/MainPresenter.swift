@@ -9,12 +9,13 @@ import Foundation
 import UIKit
 import Photos
 
-class MainPresenter: MainPresenterInputProtocol {
+class MainPresenter: MainPresenterInputProtocol {    
     weak var view: MainViewPresenterOutputProtocol?
     fileprivate var router: RouterProtocol?
     fileprivate var model: MainModel
     fileprivate var accessManager: AccessManagerProtocol?
     fileprivate var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
+    fileprivate var drawToolsSettingsDelegate: DrawToolsSettingsDelegate?
     
     required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel) {
         self.view = view
@@ -81,8 +82,48 @@ class MainPresenter: MainPresenterInputProtocol {
         return model.photo
     }
     
-    func reloadWorkspace() {
+    func showNextLine() {
+        LinesManager.shared.nextLine()
+    }
+    
+    func showPreviusLine() {
+        LinesManager.shared.previusLine()
+    }
+    
+    func clearCanvas() {
+        LinesManager.shared.clearCanvas()
+    }
+    
+    func tapOnToolButton(tool: BottomButtonImageNames) {
+        guard let pencilIndex = BottomButtonImageNames.allValues.firstIndex(of: .Pencil) else { return }
+        guard let eraserIndex = BottomButtonImageNames.allValues.firstIndex(of: .Eraser) else { return }
         
+        switch tool {
+        case .Pencil:
+            BottomButtonImageNames.disabledValues[pencilIndex] = true
+            BottomButtonImageNames.disabledValues[eraserIndex] = false
+        case .Eraser:
+            BottomButtonImageNames.disabledValues[pencilIndex] = false
+            BottomButtonImageNames.disabledValues[eraserIndex] = true
+        case .Ruler:
+            guard let rulerIndex = BottomButtonImageNames.allValues.firstIndex(of: .Ruler) else { return }
+            BottomButtonImageNames.disabledValues[rulerIndex] = !BottomButtonImageNames.disabledValues[rulerIndex]
+        case .Eye:
+            return
+        case .Folder:
+            return
+        }
+        
+        drawToolsSettingsDelegate?.setTool(tool)
+        view?.reloadToolButtons()
+    }
+    
+    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate?) {
+        self.drawToolsSettingsDelegate = delegate
+    }
+    
+    func setLineWidth(_ width: CGFloat) {
+        drawToolsSettingsDelegate?.setLineWidth(width)
     }
 }
 

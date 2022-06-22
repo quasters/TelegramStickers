@@ -63,4 +63,8 @@ extension MainViewController: MainViewPresenterOutputProtocol {
         
         self.configurateWorkspace(image: image)
     }
+    
+    func reloadToolButtons() {
+        self.setUpBottomTools()
+    }
 }

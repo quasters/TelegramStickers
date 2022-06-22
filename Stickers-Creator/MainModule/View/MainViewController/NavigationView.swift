@@ -20,18 +20,18 @@ extension MainViewController: LinesManagerButtonSettingsDelegate {
         LinesManager.shared.buttonSettingsDelegate = self
     }
     
-    func createInfoButton() {
+    private func createInfoButton() {
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(pushInfoView(sender:)), for: .touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
         self.navigationItem.leftBarButtonItem = infoBarButtonItem
     }
     
-    @objc func pushInfoView(sender: UIBarButtonItem) {
+    @objc private func pushInfoView(sender: UIBarButtonItem) {
         presenter?.tapOnInfoButton()
     }
     
-    func createRightButtons(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool) {
+    private func createRightButtons(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool) {
         var buttons = [UIBarButtonItem]()
         buttons.append(createButton(image: "camera", isEnabled: true, action: #selector(requestActionSheet)))
         buttons.append(createButton(image: "arrow.uturn.right.circle", isEnabled: forwardStatus, action: #selector(nextLine)))
@@ -41,27 +41,27 @@ extension MainViewController: LinesManagerButtonSettingsDelegate {
         self.navigationItem.rightBarButtonItems = buttons
     }
     
-    func createButton(image: String, isEnabled: Bool, action: Selector?) -> UIBarButtonItem {
+    private func createButton(image: String, isEnabled: Bool, action: Selector?) -> UIBarButtonItem {
         let image = UIImage(systemName: image)
         let ButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: action)
         ButtonItem.isEnabled = isEnabled
         return ButtonItem
     }
     
-    @objc func requestActionSheet() {
+    @objc private func requestActionSheet() {
         self.presenter?.tapOnCameraButton()
     }
     
-    @objc func previousLine() {
-        LinesManager.shared.previusLine()
+    @objc private func previousLine() {
+        self.presenter?.showPreviusLine()
     }
     
-    @objc func nextLine() {
-        LinesManager.shared.nextLine()
+    @objc private func nextLine() {
+        self.presenter?.showNextLine()
     }
     
-    @objc func deleteLines() {
-        LinesManager.shared.clearCanvas()
+    @objc private func deleteLines() {
+        self.presenter?.clearCanvas()
     }
     
     func showCameraActionSheet() {

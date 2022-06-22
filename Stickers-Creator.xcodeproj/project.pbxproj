@@ -17,11 +17,17 @@
 		D185D37E2862240200D831CE /* DrawToolsSettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D37D2862240200D831CE /* DrawToolsSettingsDelegate.swift */; };
 		D185D382286225D700D831CE /* UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */; };
 		D185D3842862264300D831CE /* LinesManagerButtonSettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D3832862264300D831CE /* LinesManagerButtonSettingsDelegate.swift */; };
+		D185D38C286328D400D831CE /* ChangesResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D38B286328D300D831CE /* ChangesResultModel.swift */; };
+		D185D38E2863292A00D831CE /* ChangesResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D38D2863292A00D831CE /* ChangesResultViewController.swift */; };
+		D185D390286329D000D831CE /* ChangesResultPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D38F286329D000D831CE /* ChangesResultPresenterProtocol.swift */; };
+		D185D39228632A0400D831CE /* MainViewPresenterOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D39128632A0400D831CE /* MainViewPresenterOutputProtocol.swift */; };
+		D185D39428632C6F00D831CE /* BottomButtonImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D39328632C6F00D831CE /* BottomButtonImageNames.swift */; };
+		D185D39628632D6E00D831CE /* setUpBottomTools().swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D39528632D6E00D831CE /* setUpBottomTools().swift */; };
 		D191013A283514F500CE2A35 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1910139283514F500CE2A35 /* InfoCell.swift */; };
 		D19B62602844FA0200F4F0BE /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B625F2844FA0200F4F0BE /* UIScrollView.swift */; };
 		D19B62622844FBA400F4F0BE /* LineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B62612844FBA400F4F0BE /* LineModel.swift */; };
 		D19B626C28452F5E00F4F0BE /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B626B28452F5E00F4F0BE /* DrawView.swift */; };
-		D19D3DBF283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift */; };
+		D19D3DBF283595BC00B441F5 /* MainViewPresenterOutputProtocol + extenshion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol + extenshion.swift */; };
 		D1AE531C2837C3F700C038B6 /* SelectedPhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE531B2837C3F700C038B6 /* SelectedPhotosPresenter.swift */; };
 		D1AE531F2837C71100C038B6 /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE531E2837C71100C038B6 /* InfoModel.swift */; };
 		D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE532A2839120F00C038B6 /* ErrorViewController.swift */; };
@@ -38,7 +44,7 @@
 		D1D6B4E32833FBB30050EEDF /* Stickers_CreatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4E22833FBB30050EEDF /* Stickers_CreatorUITests.swift */; };
 		D1D6B4E52833FBB30050EEDF /* Stickers_CreatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4E42833FBB30050EEDF /* Stickers_CreatorUITestsLaunchTests.swift */; };
 		D1D6B4F82834000E0050EEDF /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4F72834000E0050EEDF /* MainModel.swift */; };
-		D1D6B4FC2834069B0050EEDF /* MainPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4FB2834069B0050EEDF /* MainPresenterProtocols.swift */; };
+		D1D6B4FC2834069B0050EEDF /* MainPresenterInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4FB2834069B0050EEDF /* MainPresenterInputProtocol.swift */; };
 		D1D6B500283417EE0050EEDF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4FF283417EE0050EEDF /* Router.swift */; };
 		D1D6B502283418680050EEDF /* AsselderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B501283418680050EEDF /* AsselderBuilder.swift */; };
 		D1D6B50628341F350050EEDF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B50528341F350050EEDF /* InfoViewController.swift */; };
@@ -75,11 +81,17 @@
 		D185D37D2862240200D831CE /* DrawToolsSettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawToolsSettingsDelegate.swift; sourceTree = "<group>"; };
 		D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
 		D185D3832862264300D831CE /* LinesManagerButtonSettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesManagerButtonSettingsDelegate.swift; sourceTree = "<group>"; };
+		D185D38B286328D300D831CE /* ChangesResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesResultModel.swift; sourceTree = "<group>"; };
+		D185D38D2863292A00D831CE /* ChangesResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesResultViewController.swift; sourceTree = "<group>"; };
+		D185D38F286329D000D831CE /* ChangesResultPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangesResultPresenterProtocol.swift; sourceTree = "<group>"; };
+		D185D39128632A0400D831CE /* MainViewPresenterOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenterOutputProtocol.swift; sourceTree = "<group>"; };
+		D185D39328632C6F00D831CE /* BottomButtonImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonImageNames.swift; sourceTree = "<group>"; };
+		D185D39528632D6E00D831CE /* setUpBottomTools().swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "setUpBottomTools().swift"; sourceTree = "<group>"; };
 		D1910139283514F500CE2A35 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		D19B625F2844FA0200F4F0BE /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		D19B62612844FBA400F4F0BE /* LineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineModel.swift; sourceTree = "<group>"; };
 		D19B626B28452F5E00F4F0BE /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
-		D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenterOutputProtocol.swift; sourceTree = "<group>"; };
+		D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol + extenshion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewPresenterOutputProtocol + extenshion.swift"; sourceTree = "<group>"; };
 		D1AE531B2837C3F700C038B6 /* SelectedPhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosPresenter.swift; sourceTree = "<group>"; };
 		D1AE531E2837C71100C038B6 /* InfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
 		D1AE532A2839120F00C038B6 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +112,7 @@
 		D1D6B4E22833FBB30050EEDF /* Stickers_CreatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stickers_CreatorUITests.swift; sourceTree = "<group>"; };
 		D1D6B4E42833FBB30050EEDF /* Stickers_CreatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stickers_CreatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D1D6B4F72834000E0050EEDF /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
-		D1D6B4FB2834069B0050EEDF /* MainPresenterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocols.swift; sourceTree = "<group>"; };
+		D1D6B4FB2834069B0050EEDF /* MainPresenterInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterInputProtocol.swift; sourceTree = "<group>"; };
 		D1D6B4FF283417EE0050EEDF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D1D6B501283418680050EEDF /* AsselderBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsselderBuilder.swift; sourceTree = "<group>"; };
 		D1D6B50528341F350050EEDF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +190,40 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		D185D3872863280B00D831CE /* ChangesResultModule */ = {
+			isa = PBXGroup;
+			children = (
+				D185D3892863285E00D831CE /* Presenter */,
+				D185D3882863285600D831CE /* View */,
+				D185D38A2863288900D831CE /* Model */,
+			);
+			path = ChangesResultModule;
+			sourceTree = "<group>";
+		};
+		D185D3882863285600D831CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D185D38D2863292A00D831CE /* ChangesResultViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D185D3892863285E00D831CE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D185D38F286329D000D831CE /* ChangesResultPresenterProtocol.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D185D38A2863288900D831CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D185D38B286328D300D831CE /* ChangesResultModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D1AE53122837A0BC00C038B6 /* SelectedPhotosModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,9 +289,10 @@
 			isa = PBXGroup;
 			children = (
 				D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */,
+				D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol + extenshion.swift */,
 				D1B5E5862860E6F700F2F6C8 /* NavigationView.swift */,
-				D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift */,
 				D19B625F2844FA0200F4F0BE /* UIScrollView.swift */,
+				D185D39528632D6E00D831CE /* setUpBottomTools().swift */,
 				D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate .swift */,
 				D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */,
 			);
@@ -275,6 +322,7 @@
 		D1D6B4C02833FBAF0050EEDF /* Stickers-Creator */ = {
 			isa = PBXGroup;
 			children = (
+				D185D3872863280B00D831CE /* ChangesResultModule */,
 				D1D89169283E4FA600DEB961 /* App */,
 				D147844D2836C7CD006711DA /* ServiceLayer */,
 				D1D6B4F12833FCA00050EEDF /* MainModule */,
@@ -319,6 +367,7 @@
 		D1D6B4F22833FCCD0050EEDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D185D39328632C6F00D831CE /* BottomButtonImageNames.swift */,
 				D1D6B4F72834000E0050EEDF /* MainModel.swift */,
 				D19B62612844FBA400F4F0BE /* LineModel.swift */,
 			);
@@ -338,7 +387,8 @@
 		D1D6B4F42833FCDD0050EEDF /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				D1D6B4FB2834069B0050EEDF /* MainPresenterProtocols.swift */,
+				D1D6B4FB2834069B0050EEDF /* MainPresenterInputProtocol.swift */,
+				D185D39128632A0400D831CE /* MainViewPresenterOutputProtocol.swift */,
 				D1D8916A283E9FEF00DEB961 /* MainPresenter.swift */,
 			);
 			path = Presenter;
@@ -516,7 +566,7 @@
 			files = (
 				D14D3137285562C400DF04CA /* MaskImageBinder.swift in Sources */,
 				D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */,
-				D19D3DBF283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift in Sources */,
+				D19D3DBF283595BC00B441F5 /* MainViewPresenterOutputProtocol + extenshion.swift in Sources */,
 				D1D6B502283418680050EEDF /* AsselderBuilder.swift in Sources */,
 				D1D6B4C22833FBAF0050EEDF /* AppDelegate.swift in Sources */,
 				D1D8916D283EACC800DEB961 /* SelectedPhotosPresenterProtocols.swift in Sources */,
@@ -526,6 +576,7 @@
 				D167F2672839753800794A48 /* SelectedPhotosCollectionViewController.swift in Sources */,
 				D19B626C28452F5E00F4F0BE /* DrawView.swift in Sources */,
 				D185D3842862264300D831CE /* LinesManagerButtonSettingsDelegate.swift in Sources */,
+				D185D38E2863292A00D831CE /* ChangesResultViewController.swift in Sources */,
 				D1AE531F2837C71100C038B6 /* InfoModel.swift in Sources */,
 				D1D8916B283E9FEF00DEB961 /* MainPresenter.swift in Sources */,
 				D147844C2836903F006711DA /* AccessQuestioner.swift in Sources */,
@@ -534,14 +585,19 @@
 				D19B62622844FBA400F4F0BE /* LineModel.swift in Sources */,
 				D185D37E2862240200D831CE /* DrawToolsSettingsDelegate.swift in Sources */,
 				D191013A283514F500CE2A35 /* InfoCell.swift in Sources */,
+				D185D39628632D6E00D831CE /* setUpBottomTools().swift in Sources */,
 				D19B62602844FA0200F4F0BE /* UIScrollView.swift in Sources */,
 				D1D6B50628341F350050EEDF /* InfoViewController.swift in Sources */,
 				D1AE53312839180500C038B6 /* ErrorPresenter.swift in Sources */,
 				D1D6B4F82834000E0050EEDF /* MainModel.swift in Sources */,
+				D185D39428632C6F00D831CE /* BottomButtonImageNames.swift in Sources */,
+				D185D390286329D000D831CE /* ChangesResultPresenterProtocol.swift in Sources */,
+				D185D39228632A0400D831CE /* MainViewPresenterOutputProtocol.swift in Sources */,
 				D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */,
 				D167F26A2839B99D00794A48 /* SelectedCell.swift in Sources */,
-				D1D6B4FC2834069B0050EEDF /* MainPresenterProtocols.swift in Sources */,
+				D1D6B4FC2834069B0050EEDF /* MainPresenterInputProtocol.swift in Sources */,
 				D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */,
+				D185D38C286328D400D831CE /* ChangesResultModel.swift in Sources */,
 				D14D313D285A115B00DF04CA /* ImageMaskCreator.swift in Sources */,
 				D1AE531C2837C3F700C038B6 /* SelectedPhotosPresenter.swift in Sources */,
 				D14D3142285B3FF100DF04CA /* LinesManager.swift in Sources */,

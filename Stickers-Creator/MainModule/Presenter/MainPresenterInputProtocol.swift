@@ -5,7 +5,6 @@
 //  Created by Наиль Буркеев on 17.05.2022.
 //
 
-import Foundation
 import Photos
 import UIKit
 
@@ -29,20 +28,11 @@ protocol MainPresenterInputProtocol: AnyObject {
     func setImage(image: UIImage?)
     func getImage() -> UIImage?
     
-    func reloadWorkspace()
-}
-
-protocol MainViewPresenterOutputProtocol: AnyObject {
-    func showActionSheet()
+    func showNextLine()
+    func showPreviusLine()
+    func clearCanvas()
     
-    func checkAccessToCamera()
-    func checkAccessToLibrary()
-    
-    func showWarningAlert(message: String)
-    func showWarningAlertToApplicationSettings(message: String)
-    
-    func openGallery()
-    func openCamera()
-    
-    func loadImageToWorkspace(image: UIImage)
+    func tapOnToolButton(tool: BottomButtonImageNames)
+    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate?)
+    func setLineWidth(_ width: CGFloat)
 }

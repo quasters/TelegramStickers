@@ -17,7 +17,7 @@ class ImageMaskCreator {
         
         UIGraphicsBeginImageContext(size)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        context.clear(frame)
+        //context.clear(frame)
         
         for (index, line) in lines.enumerated() where index < currentLine {
             context.addPath(line.path)

@@ -28,6 +28,11 @@ extension MainViewController: UIScrollViewDelegate {
         ])
         
         // MARK: - Add CanvasLayer
+        var drawToolsSettingsDelegate: DrawToolsSettingsDelegate? {
+            didSet  {
+                presenter?.setDrawToolsSettingsDelegate(drawToolsSettingsDelegate)
+            }
+        }
         workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image, setterSettingsReceiverDelegate: &drawToolsSettingsDelegate)
         
         guard let workspaceImageView = workspaceImageView else { return }
@@ -40,7 +45,7 @@ extension MainViewController: UIScrollViewDelegate {
         ])
         
         // MARK: - Configure canvas DrawView
-        drawToolsSettingsDelegate?.setLineWidth(CGFloat(brushSizeSlider.value))
+        presenter?.setLineWidth(CGFloat(brushSizeSlider.value))
         
         // MARK: - Change buttons to default value
         BottomButtonImageNames.disabledValues = BottomButtonImageNames.disabledValues.map { _ -> Bool in
@@ -48,7 +53,7 @@ extension MainViewController: UIScrollViewDelegate {
             return mutableButton
         }
         BottomButtonImageNames.disabledValues[0] = true
-        setUpBottomButtons()
+        setUpBottomTools()
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
