@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol LinesManagerButtonSettingsDelegate: AnyObject {
-    func reloadActivityStatus(clearStatus: Bool, backStatus: Bool, forwardStatus: Bool)
-}
-
 class LinesManager {
     static var shared = LinesManager()
     private init(){}
@@ -45,41 +41,39 @@ class LinesManager {
 
     func clearCanvas() {
         currentLine = 0
-        reloadView()
+        reloadView(isNext: false)
     }
     
     func previusLine() {
         currentLine -= 1
-        reloadView()
+        reloadView(isNext: false)
     }
 
     func nextLine() {
         currentLine += 1
-        reloadView()
+        reloadView(isNext: true)
     }
     
-    private func reloadView() {
-        printLines()
+    private func reloadView(isNext: Bool) {
+        printLines(isNext: isNext)
         sendButtonsStatus()
     }
     
-    private func printLines() {
+    private func printLines(isNext: Bool) {
         guard let imageView = self.imageView else { return }
         
         UIGraphicsBeginImageContext(imageView.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
-        context.clear(imageView.bounds)
         
-        
-        for (index, line) in savedLines.enumerated() where index < currentLine {
-            context.addPath(line.path)
-            context.setBlendMode( !line.isErase ? .color : .clear )
-            context.setLineWidth(line.width)
-            context.setStrokeColor(UIColor.white.cgColor)
-            context.setLineCap(CGLineCap.round)
-            context.setLineJoin(CGLineJoin.round)
-            context.strokePath()
+        if !isNext {
+            context.clear(imageView.bounds)
+            for (index, line) in savedLines.enumerated() where index < currentLine {
+                setUpContext(context: context, line: line)
+            }
+        } else {
+            let line = savedLines[currentLine - 1]
+            setUpContext(context: context, line: line)
         }
         
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
@@ -87,8 +81,18 @@ class LinesManager {
         UIGraphicsEndImageContext()
         
         // FIXME: - remove
-//        let imageMask = self.getImageMask(lines: savedLines)
-//        self.delegate?.setMask(imageMask)
+        // let imageMask = self.getImageMask(lines: savedLines)
+        // self.delegate?.setMask(imageMask)
+    }
+    
+    private func setUpContext(context: CGContext, line: LineModel) {
+        context.addPath(line.path)
+        context.setBlendMode( !line.isErase ? .color : .clear )
+        context.setLineWidth(line.width)
+        context.setStrokeColor(UIColor.white.cgColor)
+        context.setLineCap(CGLineCap.round)
+        context.setLineJoin(CGLineJoin.round)
+        context.strokePath()
     }
     
     private func sendButtonsStatus() {

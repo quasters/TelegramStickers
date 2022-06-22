@@ -41,7 +41,14 @@ extension MainViewController: UIScrollViewDelegate {
         
         // MARK: - Configure canvas DrawView
         drawToolsSettingsDelegate?.setLineWidth(CGFloat(brushSizeSlider.value))
-        drawToolsSettingsDelegate?.setTool(false)
+        
+        // MARK: - Change buttons to default value
+        BottomButtonImageNames.disabledValues = BottomButtonImageNames.disabledValues.map { _ -> Bool in
+            let mutableButton = false
+            return mutableButton
+        }
+        BottomButtonImageNames.disabledValues[0] = true
+        setUpBottomButtons()
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

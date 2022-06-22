@@ -10,10 +10,13 @@
 		D147844C2836903F006711DA /* AccessQuestioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D147844B2836903F006711DA /* AccessQuestioner.swift */; };
 		D14D3137285562C400DF04CA /* MaskImageBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3136285562C400DF04CA /* MaskImageBinder.swift */; };
 		D14D313D285A115B00DF04CA /* ImageMaskCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D313C285A115B00DF04CA /* ImageMaskCreator.swift */; };
-		D14D3140285A17C000DF04CA /* PHPickerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate.swift */; };
+		D14D3140285A17C000DF04CA /* PHPickerViewControllerDelegate .swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate .swift */; };
 		D14D3142285B3FF100DF04CA /* LinesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14D3141285B3FF100DF04CA /* LinesManager.swift */; };
 		D167F2672839753800794A48 /* SelectedPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F2652839753800794A48 /* SelectedPhotosCollectionViewController.swift */; };
 		D167F26A2839B99D00794A48 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167F2692839B99D00794A48 /* SelectedCell.swift */; };
+		D185D37E2862240200D831CE /* DrawToolsSettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D37D2862240200D831CE /* DrawToolsSettingsDelegate.swift */; };
+		D185D382286225D700D831CE /* UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */; };
+		D185D3842862264300D831CE /* LinesManagerButtonSettingsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D185D3832862264300D831CE /* LinesManagerButtonSettingsDelegate.swift */; };
 		D191013A283514F500CE2A35 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1910139283514F500CE2A35 /* InfoCell.swift */; };
 		D19B62602844FA0200F4F0BE /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B625F2844FA0200F4F0BE /* UIScrollView.swift */; };
 		D19B62622844FBA400F4F0BE /* LineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B62612844FBA400F4F0BE /* LineModel.swift */; };
@@ -24,6 +27,7 @@
 		D1AE532C2839120F00C038B6 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE532A2839120F00C038B6 /* ErrorViewController.swift */; };
 		D1AE532D2839120F00C038B6 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1AE532B2839120F00C038B6 /* ErrorViewController.xib */; };
 		D1AE53312839180500C038B6 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE53302839180500C038B6 /* ErrorPresenter.swift */; };
+		D1B5E5872860E6F700F2F6C8 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B5E5862860E6F700F2F6C8 /* NavigationView.swift */; };
 		D1D6B4C22833FBAF0050EEDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */; };
 		D1D6B4C42833FBAF0050EEDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */; };
 		D1D6B4C62833FBAF0050EEDF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */; };
@@ -64,10 +68,13 @@
 		D147844B2836903F006711DA /* AccessQuestioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessQuestioner.swift; sourceTree = "<group>"; };
 		D14D3136285562C400DF04CA /* MaskImageBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskImageBinder.swift; sourceTree = "<group>"; };
 		D14D313C285A115B00DF04CA /* ImageMaskCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMaskCreator.swift; sourceTree = "<group>"; };
-		D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
+		D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHPickerViewControllerDelegate .swift"; sourceTree = "<group>"; };
 		D14D3141285B3FF100DF04CA /* LinesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesManager.swift; sourceTree = "<group>"; };
 		D167F2652839753800794A48 /* SelectedPhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		D167F2692839B99D00794A48 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
+		D185D37D2862240200D831CE /* DrawToolsSettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawToolsSettingsDelegate.swift; sourceTree = "<group>"; };
+		D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerDelegate.swift; sourceTree = "<group>"; };
+		D185D3832862264300D831CE /* LinesManagerButtonSettingsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesManagerButtonSettingsDelegate.swift; sourceTree = "<group>"; };
 		D1910139283514F500CE2A35 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		D19B625F2844FA0200F4F0BE /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		D19B62612844FBA400F4F0BE /* LineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineModel.swift; sourceTree = "<group>"; };
@@ -78,6 +85,7 @@
 		D1AE532A2839120F00C038B6 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		D1AE532B2839120F00C038B6 /* ErrorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		D1AE53302839180500C038B6 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
+		D1B5E5862860E6F700F2F6C8 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		D1D6B4BE2833FBAF0050EEDF /* Stickers-Creator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stickers-Creator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D6B4C12833FBAF0050EEDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1D6B4C32833FBAF0050EEDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +161,23 @@
 			path = CameraPhotoAccess;
 			sourceTree = "<group>";
 		};
+		D185D37F2862245300D831CE /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				D185D37D2862240200D831CE /* DrawToolsSettingsDelegate.swift */,
+				D185D3832862264300D831CE /* LinesManagerButtonSettingsDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		D185D380286225B400D831CE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D185D37F2862245300D831CE /* Delegates */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D1AE53122837A0BC00C038B6 /* SelectedPhotosModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +237,19 @@
 				D1AE53302839180500C038B6 /* ErrorPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D1B5E5852860E6B500F2F6C8 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */,
+				D1B5E5862860E6F700F2F6C8 /* NavigationView.swift */,
+				D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift */,
+				D19B625F2844FA0200F4F0BE /* UIScrollView.swift */,
+				D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate .swift */,
+				D185D381286225D700D831CE /* UIImagePickerControllerDelegate.swift */,
+			);
+			path = MainViewController;
 			sourceTree = "<group>";
 		};
 		D1D6B4B52833FBAF0050EEDF = {
@@ -290,10 +328,8 @@
 		D1D6B4F32833FCD50050EEDF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D1D6B4C52833FBAF0050EEDF /* MainViewController.swift */,
-				D19D3DBE283595BC00B441F5 /* MainViewPresenterOutputProtocol.swift */,
-				D19B625F2844FA0200F4F0BE /* UIScrollView.swift */,
-				D14D313F285A17C000DF04CA /* PHPickerViewControllerDelegate.swift */,
+				D185D380286225B400D831CE /* Protocols */,
+				D1B5E5852860E6B500F2F6C8 /* MainViewController */,
 				D14D313E285A14C600DF04CA /* CanvasLayer */,
 			);
 			path = View;
@@ -486,13 +522,17 @@
 				D1D8916D283EACC800DEB961 /* SelectedPhotosPresenterProtocols.swift in Sources */,
 				D1D6B50828341F4A0050EEDF /* InfoPresenter.swift in Sources */,
 				D1D6B500283417EE0050EEDF /* Router.swift in Sources */,
-				D14D3140285A17C000DF04CA /* PHPickerViewControllerDelegate.swift in Sources */,
+				D14D3140285A17C000DF04CA /* PHPickerViewControllerDelegate .swift in Sources */,
 				D167F2672839753800794A48 /* SelectedPhotosCollectionViewController.swift in Sources */,
 				D19B626C28452F5E00F4F0BE /* DrawView.swift in Sources */,
+				D185D3842862264300D831CE /* LinesManagerButtonSettingsDelegate.swift in Sources */,
 				D1AE531F2837C71100C038B6 /* InfoModel.swift in Sources */,
 				D1D8916B283E9FEF00DEB961 /* MainPresenter.swift in Sources */,
 				D147844C2836903F006711DA /* AccessQuestioner.swift in Sources */,
+				D185D382286225D700D831CE /* UIImagePickerControllerDelegate.swift in Sources */,
+				D1B5E5872860E6F700F2F6C8 /* NavigationView.swift in Sources */,
 				D19B62622844FBA400F4F0BE /* LineModel.swift in Sources */,
+				D185D37E2862240200D831CE /* DrawToolsSettingsDelegate.swift in Sources */,
 				D191013A283514F500CE2A35 /* InfoCell.swift in Sources */,
 				D19B62602844FA0200F4F0BE /* UIScrollView.swift in Sources */,
 				D1D6B50628341F350050EEDF /* InfoViewController.swift in Sources */,
