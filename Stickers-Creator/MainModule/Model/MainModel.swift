@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 struct MainModel { 
-    var photo: UIImage?
+    var photo: UIImage? {
+        didSet {
+            mask = nil
+        }
+    }
+    var mask: UIImage?
 }
-

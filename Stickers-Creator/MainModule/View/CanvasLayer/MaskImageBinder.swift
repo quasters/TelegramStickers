@@ -11,7 +11,6 @@ import UIKit
 class MaskImageBinder: UIView {
     private var drawView = DrawView() // The canvas
     private var imageView = UIImageView() // UIImageView with selected image
-    private var path: CGPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,11 +19,10 @@ class MaskImageBinder: UIView {
     convenience init(frame: CGRect, image: UIImage, setterSettingsReceiverDelegate: inout DrawToolsSettingsDelegate?) {
         self.init(frame: frame)
         imageView.image = image
-        
-        drawView = getMaskImage(image: image)
+
+//      drawView = getMaskImage(image: image)
         setterSettingsReceiverDelegate = drawView
         
-        //LinesManager.shared.delegate = self
         LinesManager.shared.setImageView(imageView: drawView)
         
         drawView.isUserInteractionEnabled = true
@@ -58,14 +56,13 @@ class MaskImageBinder: UIView {
             drawView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
             drawView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
-        
     }
     
     private func getMaskImage(image: UIImage) -> DrawView {
         let height = image.size.height * imageView.image!.scale
         let width = image.size.width * imageView.image!.scale
         let imageFrame = CGRect(x: 0, y: 0, width: width, height: height)
-        
+
         return DrawView(frame: imageFrame)
     }
 }
@@ -77,14 +74,15 @@ class MaskImageBinder: UIView {
 //}
 
 extension MaskImageBinder {
-    private func cropImage(_ mask: UIImage?) {
-        guard let mask = mask else { return }
-
-        let maskLayer = CALayer()
-        maskLayer.contents = mask.cgImage
-        maskLayer.frame.origin = CGPoint(x: 0, y: 0)
-        maskLayer.frame = self.bounds
-
-        imageView.layer.mask = maskLayer
+    func cropImage(_ mask: UIImage?) -> MainModel {
+        return MainModel(photo: imageView.image, mask: mask)
+//        guard let mask = mask else { return }
+//
+//        let maskLayer = CALayer()
+//        maskLayer.contents = mask.cgImage
+//        maskLayer.frame.origin = CGPoint(x: 0, y: 0)
+//        maskLayer.frame = self.bounds
+//
+//        imageView.layer.mask = maskLayer
     }
 }

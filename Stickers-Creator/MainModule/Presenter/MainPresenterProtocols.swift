@@ -32,7 +32,26 @@ protocol MainPresenterInputProtocol: AnyObject {
     func showPreviusLine()
     func clearCanvas()
     
+    func setStickerSenderDelegate(_ delegate: MainPresenterStickerSenderDelegate)
+    
     func tapOnToolButton(tool: BottomButtonImageNames)
-    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate?)
+    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate)
     func setLineWidth(_ width: CGFloat)
+}
+
+protocol MainViewPresenterOutputProtocol: AnyObject {
+    func showActionSheet()
+    
+    func checkAccessToCamera()
+    func checkAccessToLibrary()
+    
+    func showWarningAlert(message: String)
+    func showWarningAlertToApplicationSettings(message: String)
+    
+    func openGallery()
+    func openCamera()
+    
+    func loadImageToWorkspace(image: UIImage)
+    
+    func reloadToolButtons()
 }

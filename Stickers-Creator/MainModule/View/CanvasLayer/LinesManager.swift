@@ -35,8 +35,8 @@ class LinesManager {
         savedLines.removeSubrange(currentLine ..< savedLines.endIndex)
         savedLines.append(line)
         linesCount += 1
+        
         sendButtonsStatus()
-        //reloadView()
     }
 
     func clearCanvas() {
@@ -79,10 +79,6 @@ class LinesManager {
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         imageView.alpha = 0.5
         UIGraphicsEndImageContext()
-        
-        // FIXME: - remove
-        // let imageMask = self.getImageMask(lines: savedLines)
-        // self.delegate?.setMask(imageMask)
     }
     
     private func setUpContext(context: CGContext, line: LineModel) {
@@ -101,11 +97,12 @@ class LinesManager {
         let forwardStatus = currentLine < linesCount
         buttonSettingsDelegate?.reloadActivityStatus(clearStatus: clearStatus, backStatus: backStatus, forwardStatus: forwardStatus)
     }
-    
-    func getImageMask(lines: [LineModel]) -> UIImage? {
+}
+
+extension LinesManager: MainPresenterStickerSenderDelegate {
+    func getImageMask() -> UIImage? {
         guard let bounds = self.imageView?.bounds else { return nil }
-        let imageMask = ImageMaskCreator.shared.create(frame: bounds, lines: lines, currentLine: currentLine)
+        let imageMask = ImageMaskCreator.shared.create(frame: bounds, lines: savedLines, currentLine: currentLine)
         return imageMask
     }
 }
-

@@ -11,11 +11,14 @@ import Photos
 
 class MainPresenter: MainPresenterInputProtocol {    
     weak var view: MainViewPresenterOutputProtocol?
-    fileprivate var router: RouterProtocol?
-    fileprivate var model: MainModel
-    fileprivate var accessManager: AccessManagerProtocol?
-    fileprivate var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
-    fileprivate var drawToolsSettingsDelegate: DrawToolsSettingsDelegate?
+    
+    private var router: RouterProtocol?
+    private var model: MainModel
+    private var accessManager: AccessManagerProtocol?
+    private var photoLibraryObserverViewController: PHPhotoLibraryChangeObserver?
+    
+    private var drawToolsSettingsDelegate: DrawToolsSettingsDelegate?
+    private var stickerSenderDelegate: MainPresenterStickerSenderDelegate?
     
     required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel) {
         self.view = view
@@ -109,7 +112,9 @@ class MainPresenter: MainPresenterInputProtocol {
             guard let rulerIndex = BottomButtonImageNames.allValues.firstIndex(of: .Ruler) else { return }
             BottomButtonImageNames.disabledValues[rulerIndex] = !BottomButtonImageNames.disabledValues[rulerIndex]
         case .Eye:
-            return
+            let mask = stickerSenderDelegate?.getImageMask()
+            model.mask = mask
+            router?.showResultOfChanges(model: model)
         case .Folder:
             return
         }
@@ -118,8 +123,12 @@ class MainPresenter: MainPresenterInputProtocol {
         view?.reloadToolButtons()
     }
     
-    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate?) {
+    func setDrawToolsSettingsDelegate(_ delegate: DrawToolsSettingsDelegate) {
         self.drawToolsSettingsDelegate = delegate
+    }
+    
+    func setStickerSenderDelegate(_ delegate: MainPresenterStickerSenderDelegate) {
+        self.stickerSenderDelegate = delegate
     }
     
     func setLineWidth(_ width: CGFloat) {

@@ -18,6 +18,10 @@ extension MainViewController: UIScrollViewDelegate {
         workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
         
+        presenter?.setStickerSenderDelegate(LinesManager.shared)
+              
+        
+// MARK: - Сonstraints
         self.view.addSubview(workspaceScrollView)
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -27,9 +31,10 @@ extension MainViewController: UIScrollViewDelegate {
             workspaceScrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
         
-        // MARK: - Add CanvasLayer
+        // MARK: - Adds CanvasLayer
         var drawToolsSettingsDelegate: DrawToolsSettingsDelegate? {
             didSet  {
+                guard let drawToolsSettingsDelegate = drawToolsSettingsDelegate else { return }
                 presenter?.setDrawToolsSettingsDelegate(drawToolsSettingsDelegate)
             }
         }

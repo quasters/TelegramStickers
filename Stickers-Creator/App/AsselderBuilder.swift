@@ -12,7 +12,7 @@ protocol AsselderBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController?
     func createInfoModule(router: RouterProtocol) -> UIViewController?
     func createSelectedPhotosModule(router: RouterProtocol) -> UINavigationController?
-    func createErrorController(router: RouterProtocol, code: Int, message: String) -> UIViewController
+    func createResultOfChangesModule(router: RouterProtocol, model: MainModel) -> UIViewController?
 }
 
 class AsselderBuilder: AsselderBuilderProtocol {
@@ -50,9 +50,10 @@ class AsselderBuilder: AsselderBuilderProtocol {
         return navigation
     }
     
-    func createErrorController(router: RouterProtocol, code: Int, message: String) -> UIViewController {
-        let view = ErrorViewController()
-        let presenter = ErrorPresenter(view: view, router: router, errorCode: code, errorMessage: message)
+    func createResultOfChangesModule(router: RouterProtocol, model: MainModel) -> UIViewController? {
+        let view = ResultOfChangesViewController()
+        let presenter = ResultOfChangesPresenter(view: view, model: model, router: router)
+        
         view.presenter = presenter
         return view
     }

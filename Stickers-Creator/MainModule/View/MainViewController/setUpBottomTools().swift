@@ -17,10 +17,13 @@ extension MainViewController {
         for (disabledButtonIndex, disabledButtonValue) in BottomButtonImageNames.disabledValues.enumerated() where disabledButtonValue == true {
             buttons[disabledButtonIndex].tintColor = .gray
         }
-        
+
         bottomButtonsStackView.axis = .horizontal
         bottomButtonsStackView.distribution = .equalSpacing
         view.addSubview(bottomButtonsStackView)
+        
+//        bottomButtonsStackView.frame = CGRect(x: 20, y: view.frame.height - 75, width: view.frame.width - 40, height: 50)
+//        bottomButtonsStackView.backgroundColor = .white
         
         bottomButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -90,6 +93,8 @@ extension MainViewController {
         brushSizeSlider.value = brushSizeSliderValue
 
         brushSizeSlider.addTarget(self, action: #selector(changeBrushSize), for: .valueChanged)
+        
+        //brushSizeSlider.frame = CGRect(x: 20, y: bottomButtonsStackView.frame.origin.y - 35, width: view.frame.width - 40, height: 30)
         
         self.view.addSubview(brushSizeSlider)
         brushSizeSlider.translatesAutoresizingMaskIntoConstraints = false

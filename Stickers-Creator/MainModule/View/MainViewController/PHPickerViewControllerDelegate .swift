@@ -22,7 +22,7 @@ extension MainViewController: PHPickerViewControllerDelegate {
             }
         }
     }
-    
+        
     func requestLibraryPermission() {
         presenter?.getPhotoLibraryAccessPermission(complition: { status in
             if #available(iOS 14, *) {

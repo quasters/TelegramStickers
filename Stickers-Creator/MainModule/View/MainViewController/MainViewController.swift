@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     // UIScrollView
     var workspaceScrollView = UIScrollView()
     var workspaceImageView: MaskImageBinder?
-    var brushSizeSliderValue: Float = 39.6
+    var brushSizeSliderValue: Float = 40
     var textVC = UIView()
     
     // setUpButtonsTools()

@@ -13,11 +13,16 @@ protocol RouterProtocol {
     var assemblyBuilder: AsselderBuilderProtocol? { get set }
     
     func initialViewController()
+    
     func showSelectedPhotos()
     func closeSelectedPhotos(for view: UICollectionViewController)
+    
     func showInfo()
+    
+    func showResultOfChanges(model: MainModel)
+    
     func popToRoot()
-    func showErrorController(code: Int, message: String)
+
 }
 
 class Router: RouterProtocol {
@@ -57,16 +62,16 @@ class Router: RouterProtocol {
         }
     }
     
-    func popToRoot() {
+    func showResultOfChanges(model: MainModel) {
         if let navigationController = navigationController {
-            navigationController.popToRootViewController(animated: true)
+            guard let ResultOfChangesVC = assemblyBuilder?.createResultOfChangesModule(router: self, model: model) else { return }
+            navigationController.pushViewController(ResultOfChangesVC, animated: false)
         }
     }
     
-    func showErrorController(code: Int, message: String) {
+    func popToRoot() {
         if let navigationController = navigationController {
-            guard let errorVC = assemblyBuilder?.createErrorController(router: self, code: code, message: message) else { return }
-            navigationController.pushViewController(errorVC, animated: false)
+            navigationController.popToRootViewController(animated: true)
         }
     }
 }
