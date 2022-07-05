@@ -11,10 +11,10 @@ import UIKit
 protocol ResultOfChangesPresenterInputProtocol: AnyObject {
     func getImage() -> UIImage?
     func getMask() -> UIImage?
-    func saveImage(_ image: UIImage)
+    func tappedDoneButton()
 }
 
 
 protocol ResultOfChangesPresenterOutputProtocol: AnyObject {
-    
+    func saveImage()
 }

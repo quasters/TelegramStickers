@@ -48,7 +48,6 @@ extension UIImage {
         
         let rect = CGRect(x: CGFloat(minX),y: CGFloat(minY), width: CGFloat(maxX - minX), height: CGFloat(maxY-minY))
         
-        //let imageScale: CGFloat = self.scale
         let croppedImage = self.cgImage!.cropping(to: rect)!
         let ret = UIImage(cgImage: croppedImage)
 

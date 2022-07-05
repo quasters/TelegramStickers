@@ -10,7 +10,7 @@ import UIKit
 
 class MaskImageBinder: UIView {
     private var drawView = DrawView() // The canvas
-    private var imageView = UIImageView() // UIImageView with selected image
+    private var imageView = DrawView() // UIImageView with selected image
     
     override init(frame: CGRect) {
         super.init(frame: frame)

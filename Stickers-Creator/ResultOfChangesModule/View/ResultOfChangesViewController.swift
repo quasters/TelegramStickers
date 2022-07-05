@@ -14,32 +14,27 @@ class ResultOfChangesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemGray6
         
         configurePresenterImageView()
-        addConstraints()
-        
-        //presenter?.saveImage(presenterImageView.image!)
-        
-        
+        configureNavigation()
     }
     
-    func configurePresenterImageView() {
+    private func configurePresenterImageView() {
         presenterImageView.contentMode = .scaleAspectFit
         let maskedImage = setUpImageView()
         let image = maskedImage?.cropAlpha()
         
-        let imagePNGData = image!.pngData()
-        let imagePNG = UIImage(data: imagePNGData!)
+        guard let imagePNGData = image?.pngData() else { return } //maskedImage!.pngData()
+        let imagePNG = UIImage(data: imagePNGData)
 
         presenterImageView.image = imagePNG
-        UIImageWriteToSavedPhotosAlbum(imagePNG!, self, nil, nil)
-        
-        
+
         view.addSubview(presenterImageView)
+        addPresenterImageViewConstraints()
     }
     
-    func addConstraints() {
+    private func addPresenterImageViewConstraints() {
         presenterImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             presenterImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -49,7 +44,7 @@ class ResultOfChangesViewController: UIViewController {
         ])
     }
     
-    func setUpImageView() -> UIImage? {
+    private func setUpImageView() -> UIImage? {
         guard let image = presenter?.getImage() else { return nil }
         guard let mask = presenter?.getMask() else { return nil }
         
@@ -70,7 +65,7 @@ class ResultOfChangesViewController: UIViewController {
         return finalImage
     }
     
-    func returnFinalImage(contentView: UIImageView) -> UIImage? {
+    private func returnFinalImage(contentView: UIImageView) -> UIImage? {
         UIGraphicsBeginImageContext(CGSize(width: CGFloat(contentView.frame.size.width), height: CGFloat(contentView.frame.size.height)))
         contentView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
@@ -78,13 +73,25 @@ class ResultOfChangesViewController: UIViewController {
         return image
     }
     
+    private func configureNavigation() {
+        let infoBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDoneButton))
+        infoBarButtonItem.isEnabled = presenterImageView.image != nil
+        self.navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
     
-    
+    @objc private func tappedDoneButton() {
+        presenter?.tappedDoneButton()
+    }
 }
     
 
     
 
 extension ResultOfChangesViewController: ResultOfChangesPresenterOutputProtocol {
-    
+    func saveImage() {
+        // FIXME: - Incorrect saving png
+        if let image = presenterImageView.image {
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        }
+    }
 }
