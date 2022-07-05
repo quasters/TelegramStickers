@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
     var bottomButtonsStackView = UIStackView()
     var brushSizeSlider = UISlider()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

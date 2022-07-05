@@ -22,15 +22,13 @@ extension MainViewController {
         bottomButtonsStackView.distribution = .equalSpacing
         view.addSubview(bottomButtonsStackView)
         
-//        bottomButtonsStackView.frame = CGRect(x: 20, y: view.frame.height - 75, width: view.frame.width - 40, height: 50)
-//        bottomButtonsStackView.backgroundColor = .white
+        bottomButtonsStackView.frame = CGRect(x: 0, y: 0, width: view.frame.width - 40, height: 50)
         
         bottomButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             bottomButtonsStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             bottomButtonsStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             bottomButtonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bottomButtonsStackView.heightAnchor.constraint(equalToConstant: 50),
         ])
         setupSlider()
     }
@@ -94,14 +92,13 @@ extension MainViewController {
 
         brushSizeSlider.addTarget(self, action: #selector(changeBrushSize), for: .valueChanged)
         
-        //brushSizeSlider.frame = CGRect(x: 20, y: bottomButtonsStackView.frame.origin.y - 35, width: view.frame.width - 40, height: 30)
+        brushSizeSlider.frame = CGRect(x: 0, y: 0, width: view.frame.width - 40, height: 30)
         
         self.view.addSubview(brushSizeSlider)
         brushSizeSlider.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             brushSizeSlider.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
             brushSizeSlider.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
-            brushSizeSlider.heightAnchor.constraint(equalToConstant: 30),
             brushSizeSlider.bottomAnchor.constraint(equalTo: bottomButtonsStackView.topAnchor, constant: -15)
         ])
     }

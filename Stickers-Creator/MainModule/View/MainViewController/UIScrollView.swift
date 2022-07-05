@@ -14,15 +14,17 @@ extension MainViewController: UIScrollViewDelegate {
         workspaceScrollView.panGestureRecognizer.minimumNumberOfTouches = 2
         workspaceScrollView.panGestureRecognizer.maximumNumberOfTouches = 2
         workspaceScrollView.zoomScale = 1
-        workspaceScrollView.flashScrollIndicators()
         workspaceScrollView.bounces = true
         workspaceScrollView.delegate = self
         
         presenter?.setStickerSenderDelegate(LinesManager.shared)
               
-        
 // MARK: - Сonstraints
+        let imageSize = getDisplayedSize(imageSize: image.size, imageViewBoundsSize: self.view.bounds.size)
+        workspaceScrollView.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
+        print(workspaceScrollView.frame)
         self.view.addSubview(workspaceScrollView)
+
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             workspaceScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -40,7 +42,10 @@ extension MainViewController: UIScrollViewDelegate {
         }
         workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image, setterSettingsReceiverDelegate: &drawToolsSettingsDelegate)
         
+        
         guard let workspaceImageView = workspaceImageView else { return }
+        workspaceImageView.frame = CGRect(x: 0, y: 0, width: workspaceScrollView.frame.width, height: workspaceImageView.frame.height)
+        workspaceImageView.center=workspaceScrollView.center
         workspaceScrollView.addSubview(workspaceImageView)
         
         workspaceImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +64,18 @@ extension MainViewController: UIScrollViewDelegate {
         }
         BottomButtonImageNames.disabledValues[0] = true
         setUpBottomTools()
+    }
+    
+    private func getDisplayedSize(imageSize: CGSize, imageViewBoundsSize: CGSize) -> CGSize {
+        var imageDisplayedSize = CGSize(width: imageViewBoundsSize.width, height: imageViewBoundsSize.height)
+        let mW = imageViewBoundsSize.width / imageSize.width
+        let mH = imageViewBoundsSize.height / imageSize.height
+        if (mH < mW) {
+            imageDisplayedSize.width = mH * imageSize.width
+        } else if (mW < mH) {
+            imageDisplayedSize.height = mW * imageSize.height
+        }
+        return imageDisplayedSize
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

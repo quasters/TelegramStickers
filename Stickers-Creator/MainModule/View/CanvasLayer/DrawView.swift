@@ -81,13 +81,13 @@ class DrawView: UIImageView {
         context.setLineCap(CGLineCap.round)
         context.setLineJoin(CGLineJoin.round)
         context.setLineWidth(lineWidth)
-        context.setStrokeColor(UIColor.white.cgColor)
+        context.setStrokeColor(UIColor.blue.cgColor)
 
         context.strokePath()
 
         self.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        self.alpha = 0.5
+        self.alpha = 0.25
     }
 }
 
