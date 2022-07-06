@@ -28,6 +28,7 @@ class MaskImageBinder: UIView {
         LinesManager.shared.setImageView(imageView: drawView)
         
         drawView.isUserInteractionEnabled = true
+        drawView.isMultipleTouchEnabled = false
         
         imageView.clipsToBounds = false
         imageView.contentMode = .scaleAspectFit

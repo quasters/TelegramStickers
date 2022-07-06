@@ -56,8 +56,8 @@ extension MainViewController {
             button.addTarget(self, action: #selector(setRulerTool), for: .touchUpInside)
         case .Eye:
             button.addTarget(self, action: #selector(showChanges), for: .touchUpInside)
-        case .Folder:
-            button.addTarget(self, action: #selector(showReadyStickers), for: .touchUpInside)
+        //case .Folder:
+        //    button.addTarget(self, action: #selector(showReadyStickers), for: .touchUpInside)
         }
         
         button.setImage(image, for: .normal)
@@ -80,9 +80,9 @@ extension MainViewController {
         presenter?.tapOnToolButton(tool: .Eye)
     }
     
-    @objc private func showReadyStickers() {
-        presenter?.tapOnToolButton(tool: .Folder)
-    }
+//    @objc private func showReadyStickers() {
+//        presenter?.tapOnToolButton(tool: .Folder)
+//    }
     
     
     private func setupSlider() {

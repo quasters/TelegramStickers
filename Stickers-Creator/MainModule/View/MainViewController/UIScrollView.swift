@@ -22,7 +22,6 @@ extension MainViewController: UIScrollViewDelegate {
 // MARK: - Сonstraints
         let imageSize = getDisplayedSize(imageSize: image.size, imageViewBoundsSize: self.view.bounds.size)
         workspaceScrollView.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
-        print(workspaceScrollView.frame)
         self.view.addSubview(workspaceScrollView)
 
         workspaceScrollView.translatesAutoresizingMaskIntoConstraints = false
