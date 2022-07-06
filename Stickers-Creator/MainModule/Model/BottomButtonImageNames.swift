@@ -12,8 +12,10 @@ enum BottomButtonImageNames: String {
     case Eraser = "scissors.circle"
     case Ruler = "circle.bottomhalf.filled"
     case Eye = "eye.circle"
-    case Folder = "folder.circle"
+    //case Folder = "folder.circle"
     
-    static let allValues = [Pencil, Eraser, Ruler, Eye, Folder]
-    static var disabledValues = [true, false, false, false, false]
+    static let allValues = [Pencil, Eraser, Ruler, Eye]
+    static var disabledValues = [true, false, false, false]
+//    static let allValues = [Pencil, Eraser, Ruler, Eye, Folder]
+//    static var disabledValues = [true, false, false, false, false]
 }

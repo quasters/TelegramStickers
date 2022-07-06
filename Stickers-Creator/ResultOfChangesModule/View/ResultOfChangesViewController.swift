@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+// FIXME: - fix size of saved image to 512xY
 class ResultOfChangesViewController: UIViewController {
 
     var presenter: ResultOfChangesPresenterInputProtocol?
@@ -68,7 +70,10 @@ class ResultOfChangesViewController: UIViewController {
     private func returnFinalImage(contentView: UIImageView) -> UIImage? {
         UIGraphicsBeginImageContext(CGSize(width: CGFloat(contentView.frame.size.width), height: CGFloat(contentView.frame.size.height)))
         contentView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        var image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        if let data = image?.pngData() {
+            image = UIImage(data: data)
+        }
         UIGraphicsEndImageContext()
         return image
     }
@@ -83,15 +88,30 @@ class ResultOfChangesViewController: UIViewController {
         presenter?.tappedDoneButton()
     }
 }
-    
 
-    
 
 extension ResultOfChangesViewController: ResultOfChangesPresenterOutputProtocol {
     func saveImage() {
-        // FIXME: - Incorrect saving png
+        // FIXME: - fix white background
         if let image = presenterImageView.image {
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageDidLoad), nil)
         }
+    }
+    
+    
+    @objc private func imageDidLoad(_ im: UIImage, error: Error?, context: UnsafeMutableRawPointer?) {
+        var title: String
+        var message: String
+        if let err = error {
+            title = "Something went wrong"
+            message = "The sticker can't be uploaded to your Photo Library. Error: \(err)"
+            return
+        } else {
+            title = "Done!"
+            message = "The sticker has been uploaded to your Photo Library."
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        self.present(alert, animated: true)
     }
 }

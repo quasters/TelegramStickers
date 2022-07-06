@@ -10,7 +10,7 @@ import UIKit
 
 class MaskImageBinder: UIView {
     private var drawView = DrawView() // The canvas
-    private var imageView = DrawView() // UIImageView with selected image
+    private var imageView = UIImageView() // UIImageView with selected image
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,14 +18,17 @@ class MaskImageBinder: UIView {
     
     convenience init(frame: CGRect, image: UIImage, setterSettingsReceiverDelegate: inout DrawToolsSettingsDelegate?) {
         self.init(frame: frame)
+        imageView.frame = frame
+        drawView.frame = frame
+
         imageView.image = image
 
-//      drawView = getMaskImage(image: image)
         setterSettingsReceiverDelegate = drawView
         
         LinesManager.shared.setImageView(imageView: drawView)
         
         drawView.isUserInteractionEnabled = true
+        drawView.isMultipleTouchEnabled = false
         
         imageView.clipsToBounds = false
         imageView.contentMode = .scaleAspectFit
@@ -47,42 +50,17 @@ class MaskImageBinder: UIView {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: self.heightAnchor)
-        ])
-        
-        drawView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            drawView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
-            drawView.heightAnchor.constraint(equalTo: imageView.heightAnchor)
-        ])
-    }
-    
-    private func getMaskImage(image: UIImage) -> DrawView {
-        let height = image.size.height * imageView.image!.scale
-        let width = image.size.width * imageView.image!.scale
-        let imageFrame = CGRect(x: 0, y: 0, width: width, height: height)
+            imageView.topAnchor.constraint(equalTo: self.topAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: self.bounds.width),
+            imageView.heightAnchor.constraint(equalToConstant: self.bounds.height)
 
-        return DrawView(frame: imageFrame)
+        ])
     }
 }
-
-//extension MaskImageBinder: DrawViewDelegate {
-//    func setMask(_ mask: UIImage?) {
-//        self.cropImage(mask)
-//    }
-//}
 
 extension MaskImageBinder {
     func cropImage(_ mask: UIImage?) -> MainModel {
         return MainModel(photo: imageView.image, mask: mask)
-//        guard let mask = mask else { return }
-//
-//        let maskLayer = CALayer()
-//        maskLayer.contents = mask.cgImage
-//        maskLayer.frame.origin = CGPoint(x: 0, y: 0)
-//        maskLayer.frame = self.bounds
-//
-//        imageView.layer.mask = maskLayer
+
     }
 }

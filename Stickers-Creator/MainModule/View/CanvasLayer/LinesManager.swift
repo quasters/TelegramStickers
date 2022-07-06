@@ -77,7 +77,7 @@ class LinesManager {
         }
         
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        imageView.alpha = 0.5
+        imageView.alpha = 0.25
         UIGraphicsEndImageContext()
     }
     
@@ -85,7 +85,7 @@ class LinesManager {
         context.addPath(line.path)
         context.setBlendMode( !line.isErase ? .color : .clear )
         context.setLineWidth(line.width)
-        context.setStrokeColor(UIColor.white.cgColor)
+        context.setStrokeColor(UIColor.blue.cgColor)
         context.setLineCap(CGLineCap.round)
         context.setLineJoin(CGLineJoin.round)
         context.strokePath()

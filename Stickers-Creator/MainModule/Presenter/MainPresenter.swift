@@ -115,8 +115,8 @@ class MainPresenter: MainPresenterInputProtocol {
             let mask = stickerSenderDelegate?.getImageMask()
             model.mask = mask
             router?.showResultOfChanges(model: model)
-        case .Folder:
-            return
+        //case .Folder:
+        //    return
         }
         
         drawToolsSettingsDelegate?.setTool(tool)
