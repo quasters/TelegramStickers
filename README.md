@@ -9,3 +9,6 @@ There are 4 screens:
   - The "SelectedPhotosModule" was created for PHAuthorizationStatus.limited. It shows the selected photos.
   - The "ResultOfChangesModule" shows a final sticker and saves it. BUG: It saves png with background
   - The "InfoModule" displays a table of contacts, where there is a link to the developer, support chats. Need to replace links.
+
+
+https://user-images.githubusercontent.com/92917245/178698513-0848665c-5288-48d3-8341-f1fcdf5e336e.MP4
