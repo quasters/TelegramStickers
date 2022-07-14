@@ -9,7 +9,7 @@ import Photos
 import UIKit
 
 protocol MainPresenterInputProtocol: AnyObject {
-    init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel)
+    init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManagerProtocol, mainModel: MainModel)
     
     func tapOnInfoButton()
     func tapOnCameraButton()

@@ -20,7 +20,7 @@ class MainPresenter: MainPresenterInputProtocol {
     private var drawToolsSettingsDelegate: DrawToolsSettingsDelegate?
     private var stickerSenderDelegate: MainPresenterStickerSenderDelegate?
     
-    required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManager, mainModel: MainModel) {
+    required init(view: MainViewPresenterOutputProtocol, router: RouterProtocol, accessManager: AccessManagerProtocol, mainModel: MainModel) {
         self.view = view
         self.router = router
         self.accessManager = accessManager
