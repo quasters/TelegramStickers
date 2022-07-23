@@ -25,9 +25,13 @@ class ResultOfChangesViewController: UIViewController {
     private func configurePresenterImageView() {
         presenterImageView.contentMode = .scaleAspectFit
         let maskedImage = setUpImageView()
-        let image = maskedImage?.cropAlpha()
         
-        guard let imagePNGData = image?.pngData() else { return } //maskedImage!.pngData()
+        guard let image = maskedImage?.cropAlpha() else { return }
+        
+        guard let ciImage = CIImage(image: image)?.unpremultiplyingAlpha() else { return }
+        let uiImage = UIImage(ciImage: ciImage)
+        
+        guard let imagePNGData = uiImage.pngData() else { return }
         let imagePNG = UIImage(data: imagePNGData)
 
         presenterImageView.image = imagePNG
@@ -92,7 +96,6 @@ class ResultOfChangesViewController: UIViewController {
 
 extension ResultOfChangesViewController: ResultOfChangesPresenterOutputProtocol {
     func saveImage() {
-        // FIXME: - fix white background
         if let image = presenterImageView.image {
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageDidLoad), nil)
         }
