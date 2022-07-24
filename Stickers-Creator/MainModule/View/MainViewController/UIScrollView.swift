@@ -39,7 +39,7 @@ extension MainViewController: UIScrollViewDelegate {
                 presenter?.setDrawToolsSettingsDelegate(drawToolsSettingsDelegate)
             }
         }
-        workspaceImageView = MaskImageBinder(frame: self.workspaceScrollView.frame, image: image, setterSettingsReceiverDelegate: &drawToolsSettingsDelegate)
+        workspaceImageView = MaskImageBinder(bounds: self.workspaceScrollView.bounds, image: image, setterSettingsReceiverDelegate: &drawToolsSettingsDelegate)
         
         
         guard let workspaceImageView = workspaceImageView else { return }
@@ -70,9 +70,9 @@ extension MainViewController: UIScrollViewDelegate {
         let mW = imageViewBoundsSize.width / imageSize.width
         let mH = imageViewBoundsSize.height / imageSize.height
         if (mH < mW) {
-            imageDisplayedSize.width = mH * imageSize.width
+            imageDisplayedSize.width = CGFloat(Int(mH * imageSize.width)) // CGFloat -> Int -> CGFloat to avoid bug with floating CGContext
         } else if (mW < mH) {
-            imageDisplayedSize.height = mW * imageSize.height
+            imageDisplayedSize.height = CGFloat(Int(mW * imageSize.height))
         }
         return imageDisplayedSize
     }

@@ -62,7 +62,7 @@ class LinesManager {
     private func printLines(isNext: Bool) {
         guard let imageView = self.imageView else { return }
         
-        UIGraphicsBeginImageContext(imageView.frame.size)
+        UIGraphicsBeginImageContextWithOptions(imageView.frame.size, false, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
         

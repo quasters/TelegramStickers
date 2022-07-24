@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 // FIXME: - fix size of saved image to 512xY
 class ResultOfChangesViewController: UIViewController {
 
@@ -80,7 +79,7 @@ class ResultOfChangesViewController: UIViewController {
         }
         UIGraphicsEndImageContext()
         return image
-    }
+    }   
     
     private func configureNavigation() {
         let infoBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDoneButton))

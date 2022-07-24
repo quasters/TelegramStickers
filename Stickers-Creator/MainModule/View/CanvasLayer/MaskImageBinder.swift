@@ -16,11 +16,11 @@ class MaskImageBinder: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(frame: CGRect, image: UIImage, setterSettingsReceiverDelegate: inout DrawToolsSettingsDelegate?) {
-        self.init(frame: frame)
-        imageView.frame = frame
-        drawView.frame = frame
-
+    convenience init(bounds: CGRect, image: UIImage, setterSettingsReceiverDelegate: inout DrawToolsSettingsDelegate?) {
+        self.init(frame: bounds)
+        //imageView.frame = self.bounds
+        drawView.frame = self.bounds
+        
         imageView.image = image
 
         setterSettingsReceiverDelegate = drawView
@@ -47,7 +47,6 @@ class MaskImageBinder: UIView {
     }
     
     private func addConstrains() {
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -61,6 +60,5 @@ class MaskImageBinder: UIView {
 extension MaskImageBinder {
     func cropImage(_ mask: UIImage?) -> MainModel {
         return MainModel(photo: imageView.image, mask: mask)
-
     }
 }
