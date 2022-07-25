@@ -557,9 +557,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -573,9 +573,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -621,9 +621,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -669,9 +669,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -685,9 +685,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -701,9 +701,9 @@
             filePath = "Stickers-Creator/MainModule/View/CanvasLayer/ImageMaskCreator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "create(frame:lines:currentLine:)"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "create(frame:lines:currentLine:originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -735,7 +735,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "getImageMask()"
+            landmarkName = "getImageMask(originalSize:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -797,8 +797,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "returnFinalImage(contentView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -813,8 +813,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "setUpImageView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -829,25 +829,9 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "returnFinalImage(contentView:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5E2488C6-AC50-4983-8737-E6351909F865"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "configurePresenterImageView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -861,8 +845,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "configurePresenterImageView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -877,8 +861,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/cropAlpha().swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "cropAlpha()"
             landmarkType = "7">
          </BreakpointContent>
@@ -893,8 +877,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/cropAlpha().swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "cropAlpha()"
             landmarkType = "7">
          </BreakpointContent>
@@ -909,8 +893,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/cropAlpha().swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "cropAlpha()"
             landmarkType = "7">
          </BreakpointContent>
@@ -925,8 +909,8 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "setUpImageView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -941,41 +925,9 @@
             filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "setUpImageView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B398DBA1-D3DA-4F2E-AE41-D3310635B174"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "configurePresenterImageView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A5D45B15-6960-464F-8826-4DC452CC07FE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "configurePresenterImageView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -993,22 +945,6 @@
             endingLineNumber = "12"
             landmarkName = "MockView"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "32CC2616-F934-4CBC-92DB-6E42F189F6FC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stickers-Creator/ResultOfChangesModule/View/ResultOfChangesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "configurePresenterImageView()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

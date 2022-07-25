@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 extension UIImage {
     func cropAlpha() -> UIImage {
         let cgImage = self.cgImage!

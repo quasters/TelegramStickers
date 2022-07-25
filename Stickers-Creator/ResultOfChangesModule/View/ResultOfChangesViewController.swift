@@ -6,8 +6,8 @@
 //
 
 import UIKit
+import AlamofireImage
 
-// FIXME: - fix size of saved image to 512xY
 class ResultOfChangesViewController: UIViewController {
 
     var presenter: ResultOfChangesPresenterInputProtocol?
@@ -27,13 +27,7 @@ class ResultOfChangesViewController: UIViewController {
         
         guard let image = maskedImage?.cropAlpha() else { return }
         
-        guard let ciImage = CIImage(image: image)?.unpremultiplyingAlpha() else { return }
-        let uiImage = UIImage(ciImage: ciImage)
-        
-        guard let imagePNGData = uiImage.pngData() else { return }
-        let imagePNG = UIImage(data: imagePNGData)
-
-        presenterImageView.image = imagePNG
+        presenterImageView.image = image
 
         view.addSubview(presenterImageView)
         addPresenterImageViewConstraints()
@@ -54,32 +48,30 @@ class ResultOfChangesViewController: UIViewController {
         guard let mask = presenter?.getMask() else { return nil }
         
         let imageView = UIImageView()
-        imageView.frame = view.bounds
+        imageView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: image.size)
         imageView.contentMode = .scaleAspectFit
         imageView.image = image
         
         let maskView = UIImageView()
-        maskView.frame = view.bounds
+        maskView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: mask.size)
         maskView.contentMode = .scaleAspectFit
         maskView.image = mask
         
         imageView.mask = maskView
         
-        let finalImage = returnFinalImage(contentView: imageView)!
+        let finalImage = returnFinalImage(contentView: imageView)
         
         return finalImage
     }
     
     private func returnFinalImage(contentView: UIImageView) -> UIImage? {
-        UIGraphicsBeginImageContext(CGSize(width: CGFloat(contentView.frame.size.width), height: CGFloat(contentView.frame.size.height)))
+        let size = CGSize(width: CGFloat(contentView.frame.size.width), height: CGFloat(contentView.frame.size.height))
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         contentView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        var image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        if let data = image?.pngData() {
-            image = UIImage(data: data)
-        }
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
-    }   
+    }       
     
     private func configureNavigation() {
         let infoBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tappedDoneButton))
@@ -96,7 +88,30 @@ class ResultOfChangesViewController: UIViewController {
 extension ResultOfChangesViewController: ResultOfChangesPresenterOutputProtocol {
     func saveImage() {
         if let image = presenterImageView.image {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageDidLoad), nil)
+            var size = CGSize(width: image.size.width, height: image.size.height)
+            let widthRatio = 512 / image.size.width
+            let heightRatio = 512 / image.size.height
+            
+            if (size.width > size.height) {
+                size.width *= widthRatio
+                size.height *= widthRatio
+            } else {
+                size.width *= heightRatio
+                size.height *= heightRatio
+            }
+            
+            let writeImage = image.af.imageAspectScaled(toFit: size)
+            
+            guard let ciImage = CIImage(image: writeImage)?.unpremultiplyingAlpha() else { return }
+            let ciContext = CIContext()
+            
+            guard let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent) else { return }
+            let uiImage = UIImage(cgImage: cgImage)
+            
+            guard let imagePNGData = uiImage.pngData() else { return }
+            guard let imagePNG = UIImage(data: imagePNGData) else { return }
+
+            UIImageWriteToSavedPhotosAlbum(imagePNG, self, #selector(imageDidLoad), nil)
         }
     }
     

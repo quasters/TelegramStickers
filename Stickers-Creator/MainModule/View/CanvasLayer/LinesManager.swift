@@ -100,9 +100,9 @@ class LinesManager {
 }
 
 extension LinesManager: MainPresenterStickerSenderDelegate {
-    func getImageMask() -> UIImage? {
+    func getImageMask(originalSize: CGSize) -> UIImage? {
         guard let bounds = self.imageView?.bounds else { return nil }
-        let imageMask = ImageMaskCreator.shared.create(frame: bounds, lines: savedLines, currentLine: currentLine)
+        let imageMask = ImageMaskCreator.shared.create(frame: bounds, lines: savedLines, currentLine: currentLine, originalSize: originalSize)
         return imageMask
     }
 }

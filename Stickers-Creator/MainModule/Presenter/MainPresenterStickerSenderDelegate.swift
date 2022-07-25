@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 protocol MainPresenterStickerSenderDelegate: AnyObject {
-    func getImageMask() -> UIImage?
+    func getImageMask(originalSize: CGSize) -> UIImage?
 }
