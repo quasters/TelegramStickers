@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 extension UIImage {
     func cropAlpha() -> UIImage {
         let cgImage = self.cgImage!
@@ -50,10 +49,8 @@ extension UIImage {
         let rect = CGRect(x: CGFloat(minX),y: CGFloat(minY), width: CGFloat(maxX - minX), height: CGFloat(maxY-minY))
         
         let croppedImage = self.cgImage!.cropping(to: rect)!
-        var ret = UIImage(cgImage: croppedImage)
-        if let data = ret.pngData() {
-            ret = UIImage(data: data)!
-        }
+        let ret = UIImage(cgImage: croppedImage)
+        
         return ret
     }
     

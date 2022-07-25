@@ -112,7 +112,8 @@ class MainPresenter: MainPresenterInputProtocol {
             guard let rulerIndex = BottomButtonImageNames.allValues.firstIndex(of: .Ruler) else { return }
             BottomButtonImageNames.disabledValues[rulerIndex] = !BottomButtonImageNames.disabledValues[rulerIndex]
         case .Eye:
-            let mask = stickerSenderDelegate?.getImageMask()
+            guard let originalSize = model.photo?.size else { return }
+            let mask = stickerSenderDelegate?.getImageMask(originalSize: originalSize)
             model.mask = mask
             router?.showResultOfChanges(model: model)
         //case .Folder:

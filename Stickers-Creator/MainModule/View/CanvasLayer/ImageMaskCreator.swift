@@ -7,15 +7,16 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 
 class ImageMaskCreator {
     static var shared = ImageMaskCreator()
     private init(){}
 
-    func create(frame: CGRect, lines: [LineModel], currentLine: Int) -> UIImage? {
+    func create(frame: CGRect, lines: [LineModel], currentLine: Int, originalSize: CGSize) -> UIImage? {
         let size = CGSize(width: frame.width, height: frame.height)
 
-        UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         //context.clear(frame)
         
@@ -34,8 +35,9 @@ class ImageMaskCreator {
         UIGraphicsEndImageContext()
 
         //maskImage = invertMask(maskImage)
-
-        return maskImage
+        
+        let aspectScaledToFitMaskImage = maskImage.af.imageAspectScaled(toFit: originalSize)
+        return aspectScaledToFitMaskImage
     }
 
     private func invertMask(_ image: UIImage) -> UIImage? {

@@ -61,6 +61,11 @@ class DrawView: UIImageView {
         let line = LineModel(path: linePath, width: lineWidth, isErase: isEraserLine)
         LinesManager.shared.addLine(line: line)
     }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        touchesEnded(touches, with: event)
+    }
 
     private func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
         if !isRuler {
@@ -70,9 +75,9 @@ class DrawView: UIImageView {
             self.image = imageBeforeRuller
         }
         
-        UIGraphicsBeginImageContext(self.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        self.image?.draw(in: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        self.image?.draw(in: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
                 
         context.move(to: fromPoint)
         context.addLine(to: toPoint)
